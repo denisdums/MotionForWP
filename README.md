@@ -1,4 +1,4 @@
-# Gutenberg for motion
+# Motio for Gutenberg
 
 ## Description
 
