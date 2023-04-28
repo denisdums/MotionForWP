@@ -1,0 +1,15 @@
+{
+    "name": "denisdums/motion-for-gutenberg",
+    "autoload": {
+        "psr-4": {
+            "MotionForGutenberg\\": "classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Denis Dumont",
+            "email": "denis.dumont09@gmail.com"
+        }
+    ],
+    "require": {}
+}

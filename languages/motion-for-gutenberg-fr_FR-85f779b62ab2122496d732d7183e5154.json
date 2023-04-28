@@ -1,0 +1,36 @@
+{
+  "translation-revision-date": "YEAR-MO-DA HO:MI+ZONE",
+  "generator": "WP-CLI\/2.5.0",
+  "source": "resources\/js\/hooks\/hooks.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Motion": [
+        "Motion"
+      ],
+      "Animation": [
+        "Animation"
+      ],
+      "Duration (in seconds)": [
+        "Dur\u00e9e (en secondes)"
+      ],
+      "Delay (in seconds)": [
+        "D\u00e9lai (en secondes)"
+      ],
+      "Easing": [
+        "Courbe d'acc\u00e9l\u00e9ration"
+      ],
+      "Margin (in pixels)": [
+        "Marge (en pixels)"
+      ],
+      "Reset Motion": [
+        "R\u00e9initialiser Motion"
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "motion-for-gutenberg/motion-group",
+	"version": "0.1.0",
+	"title": "Motion For Gutenberg",
+	"category": "motion-for-gutenberg",
+	"icon": "smiley",
+	"description": "Group block for same motion animation",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "motion-for-gutenberg",
+	"editorScript": "file:index.js",
+	"editorStyle": "file:index.css",
+	"style": "file:style-index.css"
+}

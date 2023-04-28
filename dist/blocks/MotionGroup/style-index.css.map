@@ -1,0 +1,1 @@
+{"version":3,"file":"MotionGroup/style-index.css","mappings":";;;AAAA;EACC;EACA;EACA;AACD,C","sources":["webpack://motion-for-gutenberg/./resources/blocks/MotionGroup/style.scss"],"sourcesContent":[".wp-block-create-block-motion-for-gutenberg {\n\tbackground-color: #21759b;\n\tcolor: #fff;\n\tpadding: 2px;\n}\n"],"names":[],"sourceRoot":""}

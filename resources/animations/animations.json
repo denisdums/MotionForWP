@@ -1,0 +1,82 @@
+{
+	"none": {
+		"name": "None",
+		"property": "none"
+	},
+	"fade-in" : {
+		"name": "Fade In",
+		"properties": {
+			"opacity": [0,1]
+		}
+	},
+	"slide-top" : {
+		"name": "Slide Top",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["translateY(-100px)", "none"]
+		}
+	},
+	"slide-bottom" : {
+		"name": "Slide Bottom",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["translateY(100px)", "none"]
+		}
+	},
+	"slide-right" : {
+		"name": "Slide Right",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["translateX(100px)", "none"]
+		}
+	},
+	"slide-left" : {
+		"name": "Slide Left",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["translateX(-100px)", "none"]
+		}
+	},
+	"rotate-right" : {
+		"name": "Rotate Right",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["rotate(45deg)", "none"]
+		}
+	},
+	"rotate-left" : {
+		"name": "Rotate Left",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["rotate(-45deg)", "none"]
+		}
+	},
+	"rotate-translate-top": {
+		"name": "Rotate & Translate Top",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["translateY(-100px) rotate(-45deg)", "none"]
+		}
+	},
+	"rotate-translate-bottom": {
+		"name": "Rotate & Translate Bottom",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["translateY(100px) rotate(45deg)", "none"]
+		}
+	},
+	"rotate-translate-right": {
+		"name": "Rotate & Translate Right",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["translateX(100px) rotate(45deg)", "none"]
+		}
+	},
+	"rotate-translate-left": {
+		"name": "Rotate & Translate Left",
+		"properties": {
+			"opacity": [0,1],
+			"transform": ["translateX(-100px) rotate(-45deg)", "none"]
+		}
+	}
+}

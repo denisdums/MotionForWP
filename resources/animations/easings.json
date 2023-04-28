@@ -1,0 +1,26 @@
+{
+	"none": {
+		"name": "None",
+		"property": "none"
+	},
+	"ease-in": {
+		"name": "Ease In",
+		"property": "ease-in"
+	},
+	"ease-out": {
+		"name": "Ease Out",
+		"property": "ease-out"
+	},
+	"ease-in-out": {
+		"name": "Ease In Out",
+		"property": "ease-in-out"
+	},
+	"ease": {
+		"name": "Ease",
+		"property": "ease"
+	},
+	"linear": {
+		"name": "Linear",
+		"property": "linear"
+	}
+}
