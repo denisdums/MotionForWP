@@ -1,13 +1,13 @@
 <?php
 
-use MotionForGutenberg\API;
-use MotionForGutenberg\Assets;
-use MotionForGutenberg\Blocks;
-use MotionForGutenberg\Options;
-use MotionForGutenberg\Translations;
+use MotionForWP\API;
+use MotionForWP\Assets;
+use MotionForWP\Blocks;
+use MotionForWP\Options;
+use MotionForWP\Translations;
 
 /**
- * Plugin Name:       Motion For Gutenberg
+ * Plugin Name:       Motion For WP
  * Description:       Put the magic of motion in your Gutenberg blocks.
  * Requires at least: 5.7
  * Requires PHP:      7.4
@@ -16,13 +16,13 @@ use MotionForGutenberg\Translations;
  * Author URI:        https://denisdums.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       motion-for-gutenberg
+ * Text Domain:       motion-for-wp
  *
- * @package           motion-for-gutenberg
+ * @package           motion-for-wp
  */
 
 
-class MotionForGutenberg
+class MotionForWP
 {
 	public function boot(): void
 	{
@@ -38,16 +38,16 @@ class MotionForGutenberg
 
 	public function setConstants(): void
 	{
-		define('MOTION_FOR_GUTENBERG_DIR', plugin_dir_path(__FILE__));
-		define('MOTION_FOR_GUTENBERG_URL', plugin_dir_url(__FILE__));
-		define('MOTION_FOR_GUTENBERG_TEXT_DOMAIN', 'motion-for-gutenberg');
+		define('MOTION_FOR_WP_DIR', plugin_dir_path(__FILE__));
+		define('MOTION_FOR_WP_URL', plugin_dir_url(__FILE__));
+		define('MOTION_FOR_WP_TEXT_DOMAIN', 'motion-for-wp');
 	}
 
 	public function registerAutoload(): void
 	{
-		require_once MOTION_FOR_GUTENBERG_DIR . '/vendor/autoload.php';
+		require_once MOTION_FOR_WP_DIR . '/vendor/autoload.php';
 	}
 }
 
-$motionForGutenberg = new MotionForGutenberg();
-$motionForGutenberg->boot();
+$motionForWP = new MotionForWP();
+$motionForWP->boot();

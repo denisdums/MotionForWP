@@ -1,8 +1,8 @@
 {
-    "name": "denisdums/motion-for-gutenberg",
+    "name": "denisdums/motion-for-wp",
     "autoload": {
         "psr-4": {
-            "MotionForGutenberg\\": "classes/"
+            "MotionForWP\\": "classes/"
         }
     },
     "authors": [

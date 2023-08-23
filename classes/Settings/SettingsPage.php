@@ -1,6 +1,6 @@
 <?php
 
-namespace MotionForGutenberg\Settings;
+namespace MotionForWP\Settings;
 
 class SettingsPage extends SettingsAbstract
 {

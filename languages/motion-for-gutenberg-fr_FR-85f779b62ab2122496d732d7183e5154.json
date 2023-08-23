@@ -4,7 +4,7 @@
     "source": "resources\/js\/hooks\/hooks.js",
     "domain": "messages",
     "locale_data": {
-        "motion-for-gutenberg": {
+        "motion-for-wp": {
             "": {
                 "domain": "messages",
                 "lang": "fr_FR",

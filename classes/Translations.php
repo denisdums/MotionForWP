@@ -1,6 +1,6 @@
 <?php
 
-namespace MotionForGutenberg;
+namespace MotionForWP;
 
 class Translations extends BootLoadClass
 {
@@ -12,21 +12,21 @@ class Translations extends BootLoadClass
 
     public function loadScriptTranslations(): void
     {
-        if (!defined('MOTION_FOR_GUTENBERG_DIR')) return;
+        if (!defined('MOTION_FOR_WP_DIR')) return;
         wp_set_script_translations(
-            'motion-for-gutenberg-admin-script',
-            MOTION_FOR_GUTENBERG_TEXT_DOMAIN,
-            MOTION_FOR_GUTENBERG_DIR . 'languages'
+            'motion-for-wp-admin-script',
+            MOTION_FOR_WP_TEXT_DOMAIN,
+            MOTION_FOR_WP_DIR . 'languages'
         );
     }
 
     public function loadPluginTranslations(): void
     {
-        if (!defined('MOTION_FOR_GUTENBERG_DIR')) return;
+        if (!defined('MOTION_FOR_WP_DIR')) return;
         load_plugin_textdomain(
-            MOTION_FOR_GUTENBERG_TEXT_DOMAIN,
+            MOTION_FOR_WP_TEXT_DOMAIN,
             false,
-            MOTION_FOR_GUTENBERG_DIR . 'languages'
+            MOTION_FOR_WP_DIR . 'languages'
         );
     }
 }

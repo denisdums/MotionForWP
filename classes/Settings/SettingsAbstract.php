@@ -1,6 +1,6 @@
 <?php
 
-namespace MotionForGutenberg\Settings;
+namespace MotionForWP\Settings;
 
 abstract class SettingsAbstract
 {
@@ -22,7 +22,7 @@ abstract class SettingsAbstract
 
 	public function registerPage(): void
 	{
-		$displayMenu = apply_filters('motion_for_gutenberg/display_menu', true);
+		$displayMenu = apply_filters('motion_for_wp/display_menu', true);
 		if (!$displayMenu) return;
 
 		if ($this->parentMenu) {
@@ -60,7 +60,7 @@ abstract class SettingsAbstract
 				settings_fields($this->id);
 				do_settings_sections($this->id);
 				do_action($this->id . '_before_submit_button');
-				submit_button(__('Save Settings', MOTION_FOR_GUTENBERG_TEXT_DOMAIN));
+				submit_button(__('Save Settings', MOTION_FOR_WP_TEXT_DOMAIN));
 				do_action($this->id . '_after_submit_button');
 				?>
 			</form>

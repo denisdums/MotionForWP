@@ -6,8 +6,8 @@ export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
 			{ __(
-				'Motion For Gutenberg – hello from the editor!',
-				'motion-for-gutenberg'
+				'Motion For WP – hello from the editor!',
+				'motion-for-wp'
 			) }
 		</p>
 	);

@@ -24,7 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Edit() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Motion For Gutenberg – hello from the editor!', 'motion-for-gutenberg'));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Motion For WP – hello from the editor!', 'motion-for-wp'));
 }
 
 /***/ }),
@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function save() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(), 'Motion For Gutenberg – hello from the saved content!');
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(), 'Motion For WP – hello from the saved content!');
 }
 
 /***/ }),
@@ -146,7 +146,7 @@ module.exports = window["wp"]["i18n"];
   \*************************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"motion-for-gutenberg/motion-group","version":"0.1.0","title":"Motion For Gutenberg","category":"motion-for-gutenberg","icon":"smiley","description":"Group block for same motion animation","supports":{"html":false},"textdomain":"motion-for-gutenberg","editorScript":"file:index.js","editorStyle":"file:index.css","style":"file:style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"motion-for-wp/motion-group","version":"0.1.0","title":"Motion For WP","category":"motion-for-wp","icon":"smiley","description":"Group block for same motion animation","supports":{"html":false},"textdomain":"motion-for-wp","editorScript":"file:index.js","editorStyle":"file:index.css","style":"file:style-index.css"}');
 
 /***/ })
 
@@ -305,7 +305,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkmotion_for_gutenberg"] = self["webpackChunkmotion_for_gutenberg"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkmotion_for_wp"] = self["webpackChunkmotion_for_wp"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	}();

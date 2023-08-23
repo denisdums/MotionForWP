@@ -1815,8 +1815,8 @@ function InViewManager() {
       var margin;
       if (element.getAttribute('data-motion-margin')) {
         margin = element.getAttribute('data-motion-margin');
-      } else if (motionForGutenbergOptions.margin) {
-        margin = motionForGutenbergOptions.margin;
+      } else if (motionForWPOptions.margin) {
+        margin = motionForWPOptions.margin;
       } else {
         margin = 100;
       }
@@ -1845,8 +1845,8 @@ var MotionTarget = /*#__PURE__*/function () {
     key: "getAnimation",
     value: function getAnimation() {
       var animationSlug = this.element.getAttribute('data-motion-animation');
-      if (!motionForGutenbergAnimations[animationSlug]) return null;
-      return motionForGutenbergAnimations[animationSlug].properties;
+      if (!motionForWPAnimations[animationSlug]) return null;
+      return motionForWPAnimations[animationSlug].properties;
     }
   }, {
     key: "getAnimationOptions",
@@ -1861,21 +1861,21 @@ var MotionTarget = /*#__PURE__*/function () {
     key: "getDelay",
     value: function getDelay() {
       var _ref, _this$element$getAttr;
-      return (_ref = (_this$element$getAttr = this.element.getAttribute('data-motion-delay')) !== null && _this$element$getAttr !== void 0 ? _this$element$getAttr : motionForGutenbergOptions.delay) !== null && _ref !== void 0 ? _ref : 0;
+      return (_ref = (_this$element$getAttr = this.element.getAttribute('data-motion-delay')) !== null && _this$element$getAttr !== void 0 ? _this$element$getAttr : motionForWPOptions.delay) !== null && _ref !== void 0 ? _ref : 0;
     }
   }, {
     key: "getDuration",
     value: function getDuration() {
       var _ref2, _this$element$getAttr2;
-      return (_ref2 = (_this$element$getAttr2 = this.element.getAttribute('data-motion-duration')) !== null && _this$element$getAttr2 !== void 0 ? _this$element$getAttr2 : motionForGutenbergOptions.duration) !== null && _ref2 !== void 0 ? _ref2 : 0.5;
+      return (_ref2 = (_this$element$getAttr2 = this.element.getAttribute('data-motion-duration')) !== null && _this$element$getAttr2 !== void 0 ? _this$element$getAttr2 : motionForWPOptions.duration) !== null && _ref2 !== void 0 ? _ref2 : 0.5;
     }
   }, {
     key: "getEasing",
     value: function getEasing() {
-      var _motionForGutenbergOp;
+      var _motionForWPOptions$e;
       var easingSlug = this.element.getAttribute('data-motion-easing');
-      if (!motionForGutenbergEasings[easingSlug]) return (_motionForGutenbergOp = motionForGutenbergOptions.easing) !== null && _motionForGutenbergOp !== void 0 ? _motionForGutenbergOp : 'ease-in-out';
-      return motionForGutenbergEasings[easingSlug].property;
+      if (!motionForWPEasings[easingSlug]) return (_motionForWPOptions$e = motionForWPOptions.easing) !== null && _motionForWPOptions$e !== void 0 ? _motionForWPOptions$e : 'ease-in-out';
+      return motionForWPEasings[easingSlug].property;
     }
   }]);
   return MotionTarget;
@@ -2103,7 +2103,7 @@ function animate(target, keyframesOrOptions, options) {
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkmotion_for_gutenberg"] = self["webpackChunkmotion_for_gutenberg"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkmotion_for_wp"] = self["webpackChunkmotion_for_wp"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();

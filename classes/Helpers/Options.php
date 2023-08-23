@@ -1,12 +1,12 @@
 <?php
 
-namespace MotionForGutenberg\Helpers;
+namespace MotionForWP\Helpers;
 
 class Options
 {
 	public static function getAll(): array
 	{
-		$options = get_option('motion_for_gutenberg') ?: [];
-		return apply_filters('motion_for_gutenberg/get_options', $options);
+		$options = get_option('motion_for_wp') ?: [];
+		return apply_filters('motion_for_wp/get_options', $options);
 	}
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace MotionForGutenberg;
+namespace MotionForWP;
 
-use MotionForGutenberg\Helpers\Animations;
-use MotionForGutenberg\Helpers\Easings;
-use MotionForGutenberg\Helpers\Options;
+use MotionForWP\Helpers\Animations;
+use MotionForWP\Helpers\Easings;
+use MotionForWP\Helpers\Options;
 
 class Assets extends BootLoadClass
 {
@@ -16,26 +16,26 @@ class Assets extends BootLoadClass
 
     public function enqueueFrontAssets(): void
     {
-        if (!defined('MOTION_FOR_GUTENBERG_URL')) return;
-        wp_register_style('motion-for-gutenberg-style', MOTION_FOR_GUTENBERG_URL . 'dist/css/app.css');
-        wp_register_script('motion-for-gutenberg-script', MOTION_FOR_GUTENBERG_URL . 'dist/js/app.js', ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor']);
+        if (!defined('MOTION_FOR_WP_URL')) return;
+        wp_register_style('motion-for-wp-style', MOTION_FOR_WP_URL . 'dist/css/app.css');
+        wp_register_script('motion-for-wp-script', MOTION_FOR_WP_URL . 'dist/js/app.js', ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor']);
 
-        wp_enqueue_style('motion-for-gutenberg-style');
-        wp_enqueue_script('motion-for-gutenberg-script');
+        wp_enqueue_style('motion-for-wp-style');
+        wp_enqueue_script('motion-for-wp-script');
 
-        wp_localize_script('motion-for-gutenberg-script', 'motionForGutenbergAnimations', Animations::getAll());
-        wp_localize_script('motion-for-gutenberg-script', 'motionForGutenbergEasings', Easings::getAll());
-        wp_localize_script('motion-for-gutenberg-script', 'motionForGutenbergOptions', Options::getAll());
+        wp_localize_script('motion-for-wp-script', 'motionForWPAnimations', Animations::getAll());
+        wp_localize_script('motion-for-wp-script', 'motionForWPEasings', Easings::getAll());
+        wp_localize_script('motion-for-wp-script', 'motionForWPOptions', Options::getAll());
     }
 
     public function enqueueAdminAssets(): void
     {
-        wp_register_script('motion-for-gutenberg-admin-script', MOTION_FOR_GUTENBERG_URL . 'dist/js/admin.js', ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor']);
+        wp_register_script('motion-for-wp-admin-script', MOTION_FOR_WP_URL . 'dist/js/admin.js', ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor']);
 
-        wp_enqueue_script('motion-for-gutenberg-admin-script');
+        wp_enqueue_script('motion-for-wp-admin-script');
 
-        wp_localize_script('motion-for-gutenberg-admin-script', 'motionForGutenbergOptions', Options::getAll());
-        wp_localize_script('motion-for-gutenberg-admin-script', 'motionForGutenbergAnimations', Animations::getAll());
-        wp_localize_script('motion-for-gutenberg-admin-script', 'motionForGutenbergEasings', Easings::getAll());
+        wp_localize_script('motion-for-wp-admin-script', 'motionForWPOptions', Options::getAll());
+        wp_localize_script('motion-for-wp-admin-script', 'motionForWPAnimations', Animations::getAll());
+        wp_localize_script('motion-for-wp-admin-script', 'motionForWPEasings', Easings::getAll());
     }
 }

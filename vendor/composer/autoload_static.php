@@ -9,12 +9,12 @@ class ComposerStaticInitf9f6ef9384cf57fee49df2cafe366f3a
     public static $prefixLengthsPsr4 = array (
         'M' => 
         array (
-            'MotionForGutenberg\\' => 19,
+            'MotionForWP\\' => 19,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'MotionForGutenberg\\' => 
+        'MotionForWP\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),

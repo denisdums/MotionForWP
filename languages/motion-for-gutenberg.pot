@@ -2,8 +2,8 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Motion For Gutenberg 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/motion-for-gutenberg\n"
+"Project-Id-Version: Motion For WP 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/motion-for-wp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,10 +12,10 @@ msgstr ""
 "POT-Creation-Date: 2023-04-28T12:50:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
-"X-Domain: motion-for-gutenberg\n"
+"X-Domain: motion-for-wp\n"
 
 #. Plugin Name of the plugin
-msgid "Motion For Gutenberg"
+msgid "Motion For WP"
 msgstr ""
 
 #. Description of the plugin
@@ -33,7 +33,7 @@ msgstr ""
 #: dist/blocks/MotionGroup/index.js:57
 #: resources/blocks/MotionGroup/edit.js:9
 #: dist/blocks/MotionGroup/index.js:23
-msgid "Motion For Gutenberg – hello from the editor!"
+msgid "Motion For WP – hello from the editor!"
 msgstr ""
 
 #: dist/blocks/MotionGroup/index.js:227
@@ -81,7 +81,7 @@ msgstr ""
 #: dist/blocks/MotionGroup/block.json
 #: resources/blocks/MotionGroup/block.json
 msgctxt "block title"
-msgid "Motion For Gutenberg"
+msgid "Motion For WP"
 msgstr ""
 
 #: dist/blocks/MotionGroup/block.json

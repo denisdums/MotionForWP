@@ -1,1 +1,1 @@
-{"version":3,"file":"MotionGroup/index.css","mappings":";;;AAAA;EACC;AACD,C","sources":["webpack://motion-for-gutenberg/./resources/blocks/MotionGroup/editor.scss"],"sourcesContent":[".wp-block-create-block-motion-for-gutenberg {\n\tborder: 1px dotted #f00;\n}\n"],"names":[],"sourceRoot":""}
+{"version":3,"file":"MotionGroup/index.css","mappings":";;;AAAA;EACC;AACD,C","sources":["webpack://motion-for-wp/./resources/blocks/MotionGroup/editor.scss"],"sourcesContent":[".wp-block-create-block-motion-for-wp {\n\tborder: 1px dotted #f00;\n}\n"],"names":[],"sourceRoot":""}

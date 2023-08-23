@@ -1,6 +1,6 @@
 <?php
 
-namespace MotionForGutenberg;
+namespace MotionForWP;
 
 abstract class BootLoadClass
 {

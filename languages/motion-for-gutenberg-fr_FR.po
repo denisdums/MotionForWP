@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Language: fr_FR\n"
-"Project-Id-Version: Motion For Gutenberg 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/motion-for-gutenberg\n"
+"Project-Id-Version: Motion For WP 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/motion-for-wp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -13,11 +13,11 @@ msgstr ""
 "POT-Creation-Date: 2023-04-28T12:50:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
-"X-Domain: motion-for-gutenberg\n"
+"X-Domain: motion-for-wp\n"
 
 #. Plugin Name of the plugin
-msgid "Motion For Gutenberg"
-msgstr "Motion For Gutenberg"
+msgid "Motion For WP"
+msgstr "Motion For WP"
 
 #. Description of the plugin
 msgid "Put the magic of motion in your Gutenberg blocks."
@@ -34,8 +34,8 @@ msgstr "https://denisdums.com"
 #: dist/blocks/MotionGroup/index.js:57
 #: resources/blocks/MotionGroup/edit.js:9
 #: dist/blocks/MotionGroup/index.js:23
-msgid "Motion For Gutenberg – hello from the editor!"
-msgstr "Motion For Gutenberg – bonjour depuis l'éditeur !"
+msgid "Motion For WP – hello from the editor!"
+msgstr "Motion For WP – bonjour depuis l'éditeur !"
 
 #: dist/blocks/MotionGroup/index.js:227
 #: resources/js/hooks/hooks.js:120
@@ -82,8 +82,8 @@ msgstr "Réinitialiser Motion"
 #: dist/blocks/MotionGroup/block.json
 #: resources/blocks/MotionGroup/block.json
 msgctxt "block title"
-msgid "Motion For Gutenberg"
-msgstr "Motion For Gutenberg"
+msgid "Motion For WP"
+msgstr "Motion For WP"
 
 #: dist/blocks/MotionGroup/block.json
 #: resources/blocks/MotionGroup/block.json

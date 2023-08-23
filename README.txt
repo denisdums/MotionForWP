@@ -1,6 +1,6 @@
-=== Motion for Gutenberg ===
+=== Motion for WP ===
 Contributors: denisdums
-Tags: motion, gutenberg, motion for gutenberg, animations, blocks
+Tags: motion, gutenberg, motion for wp, animations, blocks
 Requires at least: 5.7
 Tested up to: 6.3
 Stable tag: 0.9
@@ -28,15 +28,15 @@ That's it!
 
 = If I need more support, where should I ask questions? =
 Use one of the channels below to contact support.
-[GitHub](https://github.com/denisdums/MotionForGutenberg) - MotionForGutenberg GitHub documentation and codebase.
+[GitHub](https://github.com/denisdums/MotionForWP) - MotionForWP GitHub documentation and codebase.
 
 == Screenshots ==
 
 1. The settings page
 2. The block settings
 
-plugins/motion-for-gutenberg/.wordpress-org/screenshot-1.png
-plugins/motion-for-gutenberg/.wordpress-org/screenshot-2.png
+plugins/motion-for-wp/.wordpress-org/screenshot-1.png
+plugins/motion-for-wp/.wordpress-org/screenshot-2.png
 
 == Changelog ==
 

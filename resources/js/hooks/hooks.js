@@ -6,7 +6,7 @@ const {BaseControl, Button, ButtonGroup, ComboboxControl, PanelBody, TextControl
 
 export function motionHooks() {
     return {
-        namespace: 'motion-for-gutenberg',
+        namespace: 'motion-for-wp',
 
         register() {
             this.bind();
@@ -80,18 +80,18 @@ export function motionHooks() {
                 }
 
                 componentDidMount() {
-                    const animations = Object.keys(motionForGutenbergAnimations).map(key => {
-                        const animation = motionForGutenbergAnimations[key];
+                    const animations = Object.keys(motionForWPAnimations).map(key => {
+                        const animation = motionForWPAnimations[key];
                         return {
-                            label: __(animation.name, 'motion-for-gutenberg'),
+                            label: __(animation.name, 'motion-for-wp'),
                             value: key
                         }
                     });
 
-                    const easings = Object.keys(motionForGutenbergEasings).map(key => {
-                        const easing = motionForGutenbergEasings[key];
+                    const easings = Object.keys(motionForWPEasings).map(key => {
+                        const easing = motionForWPEasings[key];
                         return {
-                            label: __(easing.name, 'motion-for-gutenberg'),
+                            label: __(easing.name, 'motion-for-wp'),
                             value: key
                         }
                     });
@@ -121,10 +121,10 @@ export function motionHooks() {
                             <BlockEdit {...this.props} />
 
                             <InspectorControls>
-                                <PanelBody title={__('Motion', 'motion-for-gutenberg')}>
+                                <PanelBody title={__('Motion', 'motion-for-wp')}>
                                     <BaseControl>
                                         <ComboboxControl
-                                            label={__('Animation', 'motion-for-gutenberg')}
+                                            label={__('Animation', 'motion-for-wp')}
                                             value={motion}
                                             options={this.state.availableAnimations}
                                             onChange={(value) => setAttributes({motion: value})}
@@ -133,21 +133,21 @@ export function motionHooks() {
                                     <TextControl type={'number'}
                                                  min={0}
                                                  step={0.1}
-                                                 label={__('Duration (in seconds)', 'motion-for-gutenberg')}
+                                                 label={__('Duration (in seconds)', 'motion-for-wp')}
                                                  value={duration}
                                                  onChange={(value) => setAttributes({duration: value})}
                                     />
                                     <TextControl type={'number'}
                                                  min={0}
                                                  step={0.1}
-                                                 label={__('Delay (in seconds)', 'motion-for-gutenberg')}
+                                                 label={__('Delay (in seconds)', 'motion-for-wp')}
                                                  value={delay}
                                                  onChange={(value) => setAttributes({delay: value})}
                                     />
                                     <BaseControl>
                                         <ComboboxControl
                                             options={this.state.availableEasings}
-                                            label={__('Easing', 'motion-for-gutenberg')}
+                                            label={__('Easing', 'motion-for-wp')}
                                             value={easing}
                                             onChange={(value) => setAttributes({easing: value})}
                                         />
@@ -155,13 +155,13 @@ export function motionHooks() {
                                     <TextControl type={'number'}
                                                  min={0}
                                                  step={1}
-                                                 label={__('Margin (in pixels)', 'motion-for-gutenberg')}
+                                                 label={__('Margin (in pixels)', 'motion-for-wp')}
                                                  value={margin}
                                                  onChange={(value) => setAttributes({margin: value})}
                                     />
                                     <ButtonGroup>
                                         <Button onClick={() => handleReset()}>
-                                            {__('Reset Motion', 'motion-for-gutenberg')}
+                                            {__('Reset Motion', 'motion-for-wp')}
                                         </Button>
                                     </ButtonGroup>
                                 </PanelBody>

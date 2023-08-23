@@ -1,6 +1,6 @@
 <?php
 
-namespace MotionForGutenberg;
+namespace MotionForWP;
 
 class Blocks extends BootLoadClass
 {
@@ -12,8 +12,8 @@ class Blocks extends BootLoadClass
 
 	public function registerBlockTypes(): void
 	{
-		if (!defined('MOTION_FOR_GUTENBERG_DIR')) return;
-		$gutenbergBuildDir = MOTION_FOR_GUTENBERG_DIR . '/dist/blocks';
+		if (!defined('MOTION_FOR_WP_DIR')) return;
+		$gutenbergBuildDir = MOTION_FOR_WP_DIR . '/dist/blocks';
 		$gutenbergBuildDirChildren = scandir($gutenbergBuildDir);
 		$gutenbergBuildDirChildren = array_filter($gutenbergBuildDirChildren, function ($child) {
 			return $child !== '.' && $child !== '..';
@@ -33,8 +33,8 @@ class Blocks extends BootLoadClass
 			$categories,
 			[
 				[
-					'slug' => 'motion-for-gutenberg',
-					'title' => 'Motion For Gutenberg',
+					'slug' => 'motion-for-wp',
+					'title' => 'Motion For WP',
 					'icon' => 'wordpress',
 				],
 			]

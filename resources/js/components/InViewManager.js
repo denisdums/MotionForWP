@@ -37,8 +37,8 @@ export function InViewManager() {
 
             if (element.getAttribute('data-motion-margin')) {
                 margin = element.getAttribute('data-motion-margin');
-            } else if (motionForGutenbergOptions.margin) {
-                margin = motionForGutenbergOptions.margin;
+            } else if (motionForWPOptions.margin) {
+                margin = motionForWPOptions.margin;
             } else {
                 margin = 100;
             }
@@ -67,8 +67,8 @@ export class MotionTarget {
 
     getAnimation() {
         const animationSlug = this.element.getAttribute('data-motion-animation');
-        if (!motionForGutenbergAnimations[animationSlug]) return null;
-        return motionForGutenbergAnimations[animationSlug].properties;
+        if (!motionForWPAnimations[animationSlug]) return null;
+        return motionForWPAnimations[animationSlug].properties;
     }
 
     getAnimationOptions() {
@@ -80,17 +80,17 @@ export class MotionTarget {
     }
 
     getDelay() {
-        return this.element.getAttribute('data-motion-delay') ?? motionForGutenbergOptions.delay ?? 0;
+        return this.element.getAttribute('data-motion-delay') ?? motionForWPOptions.delay ?? 0;
     }
 
     getDuration() {
-        return this.element.getAttribute('data-motion-duration') ?? motionForGutenbergOptions.duration ?? 0.5;
+        return this.element.getAttribute('data-motion-duration') ?? motionForWPOptions.duration ?? 0.5;
     }
 
     getEasing() {
         const easingSlug = this.element.getAttribute('data-motion-easing');
-        if (!motionForGutenbergEasings[easingSlug]) return motionForGutenbergOptions.easing ?? 'ease-in-out';
-        return motionForGutenbergEasings[easingSlug].property;
+        if (!motionForWPEasings[easingSlug]) return motionForWPOptions.easing ?? 'ease-in-out';
+        return motionForWPEasings[easingSlug].property;
     }
 }
 

@@ -46,7 +46,7 @@ var _wp$components = wp.components,
   TextControl = _wp$components.TextControl;
 function motionHooks() {
   return {
-    namespace: 'motion-for-gutenberg',
+    namespace: 'motion-for-wp',
     register: function register() {
       this.bind();
       this.addFilters();
@@ -104,17 +104,17 @@ function motionHooks() {
         _createClass(BlockEditWithMotion, [{
           key: "componentDidMount",
           value: function componentDidMount() {
-            var animations = Object.keys(motionForGutenbergAnimations).map(function (key) {
-              var animation = motionForGutenbergAnimations[key];
+            var animations = Object.keys(motionForWPAnimations).map(function (key) {
+              var animation = motionForWPAnimations[key];
               return {
-                label: __(animation.name, 'motion-for-gutenberg'),
+                label: __(animation.name, 'motion-for-wp'),
                 value: key
               };
             });
-            var easings = Object.keys(motionForGutenbergEasings).map(function (key) {
-              var easing = motionForGutenbergEasings[key];
+            var easings = Object.keys(motionForWPEasings).map(function (key) {
+              var easing = motionForWPEasings[key];
               return {
-                label: __(easing.name, 'motion-for-gutenberg'),
+                label: __(easing.name, 'motion-for-wp'),
                 value: key
               };
             });
@@ -147,10 +147,10 @@ function motionHooks() {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Fragment, {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(BlockEdit, _objectSpread({}, this.props)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(InspectorControls, {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(PanelBody, {
-                  title: __('Motion', 'motion-for-gutenberg'),
+                  title: __('Motion', 'motion-for-wp'),
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(BaseControl, {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ComboboxControl, {
-                      label: __('Animation', 'motion-for-gutenberg'),
+                      label: __('Animation', 'motion-for-wp'),
                       value: motion,
                       options: this.state.availableAnimations,
                       onChange: function onChange(value) {
@@ -163,7 +163,7 @@ function motionHooks() {
                     type: 'number',
                     min: 0,
                     step: 0.1,
-                    label: __('Duration (in seconds)', 'motion-for-gutenberg'),
+                    label: __('Duration (in seconds)', 'motion-for-wp'),
                     value: duration,
                     onChange: function onChange(value) {
                       return setAttributes({
@@ -174,7 +174,7 @@ function motionHooks() {
                     type: 'number',
                     min: 0,
                     step: 0.1,
-                    label: __('Delay (in seconds)', 'motion-for-gutenberg'),
+                    label: __('Delay (in seconds)', 'motion-for-wp'),
                     value: delay,
                     onChange: function onChange(value) {
                       return setAttributes({
@@ -184,7 +184,7 @@ function motionHooks() {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(BaseControl, {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ComboboxControl, {
                       options: this.state.availableEasings,
-                      label: __('Easing', 'motion-for-gutenberg'),
+                      label: __('Easing', 'motion-for-wp'),
                       value: easing,
                       onChange: function onChange(value) {
                         return setAttributes({
@@ -196,7 +196,7 @@ function motionHooks() {
                     type: 'number',
                     min: 0,
                     step: 1,
-                    label: __('Margin (in pixels)', 'motion-for-gutenberg'),
+                    label: __('Margin (in pixels)', 'motion-for-wp'),
                     value: margin,
                     onChange: function onChange(value) {
                       return setAttributes({
@@ -208,7 +208,7 @@ function motionHooks() {
                       onClick: function onClick() {
                         return handleReset();
                       },
-                      children: __('Reset Motion', 'motion-for-gutenberg')
+                      children: __('Reset Motion', 'motion-for-wp')
                     })
                   })]
                 })

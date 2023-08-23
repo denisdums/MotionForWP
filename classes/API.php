@@ -1,10 +1,10 @@
 <?php
 
-namespace MotionForGutenberg;
+namespace MotionForWP;
 
-use MotionForGutenberg\Helpers\Animations;
-use MotionForGutenberg\Helpers\Easings;
-use MotionForGutenberg\Helpers\Options;
+use MotionForWP\Helpers\Animations;
+use MotionForWP\Helpers\Easings;
+use MotionForWP\Helpers\Options;
 
 class API extends BootLoadClass
 {
@@ -15,19 +15,22 @@ class API extends BootLoadClass
 
 	public function registerRestApiEndpoints(): void
 	{
-		register_rest_route('motion-for-gutenberg/v1', '/animations', [
+		register_rest_route('motion-for-wp/v1', '/animations', [
 			'methods' => 'GET',
 			'callback' => [Animations::class, 'getAll'],
+            'permission_callback' => '__return_true',
 		]);
 
-		register_rest_route('motion-for-gutenberg/v1', '/easings', [
+		register_rest_route('motion-for-wp/v1', '/easings', [
 			'methods' => 'GET',
 			'callback' => [Easings::class, 'getAll'],
+            'permission_callback' => '__return_true',
 		]);
 
-		register_rest_route('motion-for-gutenberg/v1', '/options', [
+		register_rest_route('motion-for-wp/v1', '/options', [
 			'methods' => 'GET',
 			'callback' => [Options::class, 'getAll'],
+            'permission_callback' => '__return_true',
 		]);
 	}
 }
