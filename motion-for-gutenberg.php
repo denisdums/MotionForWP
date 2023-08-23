@@ -9,9 +9,9 @@ use MotionForGutenberg\Translations;
 /**
  * Plugin Name:       Motion For Gutenberg
  * Description:       Put the magic of motion in your Gutenberg blocks.
- * Requires at least: 6.1
- * Requires PHP:      7.0
- * Version:           0.1.0
+ * Requires at least: 5.7
+ * Requires PHP:      7.4
+ * Version:           0.9.0
  * Author:            denisdums
  * Author URI:        https://denisdums.com
  * License:           GPL-2.0-or-later
