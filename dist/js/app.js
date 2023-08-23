@@ -1874,7 +1874,7 @@ var MotionTarget = /*#__PURE__*/function () {
     value: function getEasing() {
       var _motionForGutenbergOp;
       var easingSlug = this.element.getAttribute('data-motion-easing');
-      if (!motionForGutenbergEasings[easingSlug]) return (_motionForGutenbergOp = motionForGutenbergOptions.easing) !== null && _motionForGutenbergOp !== void 0 ? _motionForGutenbergOp : 'easeInOut';
+      if (!motionForGutenbergEasings[easingSlug]) return (_motionForGutenbergOp = motionForGutenbergOptions.easing) !== null && _motionForGutenbergOp !== void 0 ? _motionForGutenbergOp : 'ease-in-out';
       return motionForGutenbergEasings[easingSlug].property;
     }
   }]);

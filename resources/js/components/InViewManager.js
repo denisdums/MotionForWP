@@ -89,7 +89,7 @@ export class MotionTarget {
 
     getEasing() {
         const easingSlug = this.element.getAttribute('data-motion-easing');
-        if (!motionForGutenbergEasings[easingSlug]) return motionForGutenbergOptions.easing ?? 'easeInOut';
+        if (!motionForGutenbergEasings[easingSlug]) return motionForGutenbergOptions.easing ?? 'ease-in-out';
         return motionForGutenbergEasings[easingSlug].property;
     }
 }
