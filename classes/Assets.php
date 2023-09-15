@@ -18,7 +18,7 @@ class Assets extends BootLoadClass
     {
         if (!defined('MOTION_FOR_WP_URL')) return;
         wp_register_style('motion-for-wp-style', MOTION_FOR_WP_URL . 'dist/css/app.css');
-        wp_register_script('motion-for-wp-script', MOTION_FOR_WP_URL . 'dist/js/app.js', ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor']);
+        wp_register_script('motion-for-wp-script', MOTION_FOR_WP_URL . 'dist/js/app.js');
 
         wp_enqueue_style('motion-for-wp-style');
         wp_enqueue_script('motion-for-wp-script');
