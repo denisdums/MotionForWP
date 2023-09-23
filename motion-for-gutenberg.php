@@ -3,6 +3,7 @@
 use MotionForWP\API;
 use MotionForWP\Assets;
 use MotionForWP\Blocks;
+use MotionForWP\ConfigFiles;
 use MotionForWP\Options;
 use MotionForWP\Translations;
 
@@ -34,6 +35,7 @@ class MotionForWP
 		Assets::boot();
 		Options::boot();
         Translations::boot();
+        ConfigFiles::boot();
 	}
 
 	public function setConstants(): void
