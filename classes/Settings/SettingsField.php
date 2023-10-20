@@ -75,6 +75,7 @@ class SettingsField
 	public function renderAttributes(): void
 	{
 		foreach ($this->attributes as $key => $value) {
+			if (is_array($value)) return;
 			echo esc_attr($key) . '="' . esc_attr($value) . '" ';
 		}
 	}
