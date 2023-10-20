@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[data-motion]{
+	opacity: 0;
+}
+
+#motion-for-wp-wrapper * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}

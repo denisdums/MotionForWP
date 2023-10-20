@@ -101,7 +101,7 @@ class SettingsField
 		?>
 		<label>
 			<input type="text"
-				   class="widefat"
+				   class="widefat pl-2"
 				   name="<?php echo esc_attr($this->getOptionKey($this->getName())); ?>"
 				   value="<?php echo esc_attr($this->getOption($this->getName(), $this->getDefault())); ?>"
 				<?php $this->renderAttributes(); ?>
@@ -116,7 +116,7 @@ class SettingsField
 		?>
 		<label>
 			<input type="number"
-				   class="widefat"
+				   class="widefat pl-2"
 				   name="<?php echo esc_attr($this->getOptionKey($this->getName())); ?>"
 				   value="<?php echo esc_attr($this->getOption($this->getName(), $this->getDefault())); ?>"
 				<?php $this->renderAttributes(); ?>
@@ -130,7 +130,7 @@ class SettingsField
 	{
 		?>
 		<label>
-			<select class="widefat"
+			<select class="widefat motion-select px-2"
 					name="<?php echo esc_attr($this->getOptionKey($this->getName())); ?>"
 				<?php $this->renderAttributes(); ?>
 			>

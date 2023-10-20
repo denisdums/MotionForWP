@@ -6,8 +6,8 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"start": "npx mix watch & npm run gutenberg:start",
-		"build": "npx mix --production & wp-scripts build",
+		"start": "TAILWIND_MODE=watch npx mix watch & npm run gutenberg:start",
+		"build": "TAILWIND_MODE=build npx mix --production & wp-scripts build",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
@@ -19,7 +19,8 @@
 	"devDependencies": {
 		"@wordpress/scripts": "^26.2.0",
 		"laravel-mix": "^6.0.49",
-		"resolve-url-loader": "^5.0.0"
+		"resolve-url-loader": "^5.0.0",
+		"tailwindcss": "^3.3.3"
 	},
 	"dependencies": {
 		"@babel/preset-env": "^7.21.4",

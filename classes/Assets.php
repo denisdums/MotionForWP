@@ -17,7 +17,7 @@ class Assets extends BootLoadClass
     public function enqueueFrontAssets(): void
     {
         if (!defined('MOTION_FOR_WP_URL')) return;
-        wp_register_style('motion-for-wp-style', MOTION_FOR_WP_URL . 'dist/css/app.css');
+        wp_register_style('motion-for-wp-style', MOTION_FOR_WP_URL . 'dist/css/front.css');
         wp_register_script('motion-for-wp-script', MOTION_FOR_WP_URL . 'dist/js/app.js', [], false, ['in_footer' => true]);
 
         wp_enqueue_style('motion-for-wp-style');
@@ -30,8 +30,10 @@ class Assets extends BootLoadClass
 
     public function enqueueAdminAssets(): void
     {
-        wp_register_script('motion-for-wp-admin-script', MOTION_FOR_WP_URL . 'dist/js/admin.js', ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor']);
+        wp_register_style('motion-for-wp-admin-style', MOTION_FOR_WP_URL . 'dist/css/admin.css');
+        wp_enqueue_style('motion-for-wp-admin-style');
 
+        wp_register_script('motion-for-wp-admin-script', MOTION_FOR_WP_URL . 'dist/js/admin.js', ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor']);
         wp_enqueue_script('motion-for-wp-admin-script');
 
         wp_localize_script('motion-for-wp-admin-script', 'motionForWPOptions', Options::getAll());

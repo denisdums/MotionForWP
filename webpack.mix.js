@@ -1,4 +1,5 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
 
 mix
 	.js('resources/js/app.js', 'dist/js')
@@ -7,5 +8,13 @@ mix
 	.react();
 
 mix
-	.sass('resources/scss/app.scss', 'dist/css')
+	.sass('resources/scss/front.scss', 'dist/css')
+	.sass('resources/scss/admin.scss', 'dist/css')
 	.setPublicPath('dist')
+
+mix
+	.options({
+		processCssUrls: false,
+		postCss: [tailwindcss('./tailwind.config.js')],
+	});
+
