@@ -12,7 +12,7 @@ use MotionForWP\Translations;
  * Description:       Put the magic of motion in your Gutenberg blocks.
  * Requires at least: 5.7
  * Requires PHP:      7.4
- * Version:           0.9.3
+ * Version:           0.9.4
  * Author:            denisdums
  * Author URI:        https://denisdums.com
  * License:           GPL-2.0-or-later
