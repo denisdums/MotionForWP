@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/blocks/MotionGroup/edit.js":
-/*!**********************************************!*\
-  !*** ./resources/blocks/MotionGroup/edit.js ***!
-  \**********************************************/
+/***/ "./resources/blocks/MotionCounter/edit.js":
+/*!************************************************!*\
+  !*** ./resources/blocks/MotionCounter/edit.js ***!
+  \************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -18,30 +18,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./resources/blocks/MotionGroup/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./resources/blocks/MotionCounter/editor.scss");
 
 
 
 
-function Edit() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Motion For WP – hello from the editor!', 'motion-for-wp'));
+function Edit(props) {
+  const onChangeContent = value => {
+    props.setAttributes({
+      content: value
+    });
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    tagName: "span",
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('123', 'motion-for-wp'),
+    value: props.attributes.content,
+    className: "motion-counter",
+    onChange: onChangeContent
+  }));
 }
 
 /***/ }),
 
-/***/ "./resources/blocks/MotionGroup/index.js":
-/*!***********************************************!*\
-  !*** ./resources/blocks/MotionGroup/index.js ***!
-  \***********************************************/
+/***/ "./resources/blocks/MotionCounter/index.js":
+/*!*************************************************!*\
+  !*** ./resources/blocks/MotionCounter/index.js ***!
+  \*************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/blocks/MotionGroup/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./resources/blocks/MotionGroup/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./resources/blocks/MotionGroup/save.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./resources/blocks/MotionGroup/block.json");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/blocks/MotionCounter/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./resources/blocks/MotionCounter/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./resources/blocks/MotionCounter/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./resources/blocks/MotionCounter/block.json");
 
 
 
@@ -54,10 +65,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/blocks/MotionGroup/save.js":
-/*!**********************************************!*\
-  !*** ./resources/blocks/MotionGroup/save.js ***!
-  \**********************************************/
+/***/ "./resources/blocks/MotionCounter/save.js":
+/*!************************************************!*\
+  !*** ./resources/blocks/MotionCounter/save.js ***!
+  \************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -70,16 +81,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function save() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(), 'Motion For WP – hello from the saved content!');
+function save(props) {
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+    tagName: "span",
+    className: "motion-counter",
+    value: props.attributes.content
+  }));
 }
 
 /***/ }),
 
-/***/ "./resources/blocks/MotionGroup/editor.scss":
-/*!**************************************************!*\
-  !*** ./resources/blocks/MotionGroup/editor.scss ***!
-  \**************************************************/
+/***/ "./resources/blocks/MotionCounter/editor.scss":
+/*!****************************************************!*\
+  !*** ./resources/blocks/MotionCounter/editor.scss ***!
+  \****************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -88,10 +104,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/blocks/MotionGroup/style.scss":
-/*!*************************************************!*\
-  !*** ./resources/blocks/MotionGroup/style.scss ***!
-  \*************************************************/
+/***/ "./resources/blocks/MotionCounter/style.scss":
+/*!***************************************************!*\
+  !*** ./resources/blocks/MotionCounter/style.scss ***!
+  \***************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -140,13 +156,13 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./resources/blocks/MotionGroup/block.json":
-/*!*************************************************!*\
-  !*** ./resources/blocks/MotionGroup/block.json ***!
-  \*************************************************/
+/***/ "./resources/blocks/MotionCounter/block.json":
+/*!***************************************************!*\
+  !*** ./resources/blocks/MotionCounter/block.json ***!
+  \***************************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"motion-for-wp/motion-group","version":"0.1.0","title":"Motion For WP","category":"motion-for-wp","icon":"smiley","description":"Group block for same motion animation","supports":{"html":false},"textdomain":"motion-for-wp","editorScript":"file:index.js","editorStyle":"file:index.css","style":"file:style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"motion-for-wp/motion-counter","version":"0.1.0","title":"Motion Counter","category":"motion-for-wp","icon":"hourglass","description":"Motion counter block","supports":{"html":false},"attributes":{"content":{"type":"string","source":"html","selector":".motion-counter"}},"textdomain":"motion-for-wp","editorScript":"file:index.js","editorStyle":"file:index.css","style":"file:style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
@@ -262,8 +278,8 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"MotionGroup/index": 0,
-/******/ 			"MotionGroup/style-index": 0
+/******/ 			"MotionCounter/index": 0,
+/******/ 			"MotionCounter/style-index": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -315,7 +331,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["MotionGroup/style-index"], function() { return __webpack_require__("./resources/blocks/MotionGroup/index.js"); })
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["MotionCounter/style-index"], function() { return __webpack_require__("./resources/blocks/MotionCounter/index.js"); })
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

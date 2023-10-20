@@ -1,0 +1,1 @@
+{"version":3,"file":"MotionCounter/index.css","mappings":";;;AAAA;EACC;AACD,C","sources":["webpack://motion-for-wp/./resources/blocks/MotionCounter/editor.scss"],"sourcesContent":[".wp-block-create-block-motion-for-wp {\n\tborder: 1px dotted #f00;\n}\n"],"names":[],"sourceRoot":""}

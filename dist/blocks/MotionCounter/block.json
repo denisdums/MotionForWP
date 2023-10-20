@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "motion-for-wp/motion-counter",
+  "version": "0.1.0",
+  "title": "Motion Counter",
+  "category": "motion-for-wp",
+  "icon": "hourglass",
+  "description": "Motion counter block",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "content": {
+      "type": "string",
+      "source": "html",
+      "selector": ".motion-counter"
+    }
+  },
+  "textdomain": "motion-for-wp",
+  "editorScript": "file:index.js",
+  "editorStyle": "file:index.css",
+  "style": "file:style-index.css",
+  "viewScript": "file:./view.js"
+}
