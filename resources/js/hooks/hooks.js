@@ -1,214 +1,127 @@
-const {Fragment, Component} = wp.element;
-const {__} = wp.i18n;
-const {createHigherOrderComponent} = wp.compose;
-const {InspectorControls} = wp.blockEditor;
-const {BaseControl, Button, ButtonGroup, ComboboxControl, PanelBody, TextControl} = wp.components;
+import { createHigherOrderComponent } from '@wordpress/compose';
+// The classic JSX transform consumes createElement after linting.
+import { createElement, Fragment } from '@wordpress/element';
+import { addFilter, applyFilters } from '@wordpress/hooks';
 
-export function motionHooks() {
-    return {
-        namespace: 'motion-for-wp',
+import { MotionInspectorControls } from '../editor/MotionInspectorControls';
+import { runtime } from '../editor/runtime';
 
-        register() {
-            this.bind();
-            this.addFilters();
-        },
+// Referenced by Babel's classic JSX transform after linting.
+void createElement;
 
-        bind() {
-            this.addFilters = this.addFilters.bind(this);
-            this.addAttributes = this.addAttributes.bind(this);
-            this.addAdvancedControls = this.addAdvancedControls.bind(this);
-            this.addExtraProps = this.addExtraProps.bind(this);
-        },
+const namespace = 'motion-for-wp';
+const excludedBlocks = new Set( runtime.excludedBlocks || [] );
+const supportedBlocks = new Set();
 
-        addFilters() {
-            wp.hooks.addFilter(
-                'blocks.registerBlockType',
-                `${this.namespace}/custom-attributes`,
-                this.addAttributes
-            );
+const canSupportMotion = ( settings, blockName ) => {
+	const hasSerializedRoot = typeof settings?.save === 'function';
+	const isSupported =
+		Boolean( blockName ) &&
+		hasSerializedRoot &&
+		! excludedBlocks.has( blockName );
 
-            wp.hooks.addFilter(
-                'editor.BlockEdit',
-                `${this.namespace}/advanced-control`,
-                this.addAdvancedControls
-            );
+	/**
+	 * Filters whether Motion controls support a registered block type.
+	 *
+	 * @param {boolean} isSupported Whether the block is supported by default.
+	 * @param {string}  blockName   Registered block name.
+	 * @param {Object}  settings    Block type settings.
+	 */
+	const filteredSupport = Boolean(
+		applyFilters(
+			'motionForWP.isBlockSupported',
+			isSupported,
+			blockName,
+			settings
+		)
+	);
 
-            wp.hooks.addFilter(
-                'blocks.getSaveContent.extraProps',
-                `${this.namespace}/extra-props`,
-                this.addExtraProps
-            );
-        },
+	return hasSerializedRoot && filteredSupport;
+};
 
-        addAttributes(settings, name) {
-            settings.attributes = {
-                ...settings.attributes,
-                motion: {
-                    type: 'string',
-                    default: 'none'
-                },
-                duration: {
-                    type: 'string',
-                    default: '0'
-                },
-                delay: {
-                    type: 'string',
-                    default: '0'
-                },
-                easing: {
-                    type: 'string',
-                    default: 'none'
-                },
-                margin: {
-                    type: 'string',
-                    default: '0'
-                }
-            };
+const addAttributes = ( settings, name ) => {
+	if ( ! canSupportMotion( settings, name ) ) {
+		return settings;
+	}
 
-            return settings;
-        },
+	supportedBlocks.add( name );
 
-        addAdvancedControls: createHigherOrderComponent((BlockEdit) => {
-            return class BlockEditWithMotion extends Component {
-                constructor(props) {
-                    super(props);
+	return {
+		...settings,
+		attributes: {
+			...settings.attributes,
+			motion: { type: 'string', default: 'none' },
+			duration: { type: 'string', default: '0' },
+			delay: { type: 'string', default: '0' },
+			easing: { type: 'string', default: 'none' },
+			margin: { type: 'string', default: '0' },
+		},
+	};
+};
 
-                    this.state = {
-                        availableAnimations: [],
-                        availableEasings: [],
-                    };
-                }
+const addAdvancedControls = createHigherOrderComponent(
+	( BlockEdit ) => ( props ) => {
+		if ( ! supportedBlocks.has( props.name ) ) {
+			return <BlockEdit { ...props } />;
+		}
 
-                componentDidMount() {
-                    const animations = Object.keys(motionForWPAnimations).map(key => {
-                        const animation = motionForWPAnimations[key];
-                        return {
-                            label: __(animation.name, 'motion-for-wp'),
-                            value: key
-                        }
-                    });
+		return (
+			<Fragment>
+				<BlockEdit { ...props } />
+				<MotionInspectorControls
+					attributes={ props.attributes }
+					clientId={ props.clientId }
+					setAttributes={ props.setAttributes }
+				/>
+			</Fragment>
+		);
+	},
+	'addAdvancedControls'
+);
 
-                    const easings = Object.keys(motionForWPEasings).map(key => {
-                        const easing = motionForWPEasings[key];
-                        return {
-                            label: __(easing.name, 'motion-for-wp'),
-                            value: key
-                        }
-                    });
+const addExtraProps = ( props, blockType, attributes ) => {
+	if (
+		! supportedBlocks.has( blockType.name ) ||
+		attributes.motion === 'none'
+	) {
+		return props;
+	}
 
-                    this.setState({
-                        availableAnimations: animations,
-                        availableEasings: easings,
-                        isDataLoaded: true
-                    });
-                };
+	const extraProps = {
+		'data-motion': true,
+		'data-motion-animation': attributes.motion,
+	};
 
-                render() {
-                    const {attributes, setAttributes} = this.props;
-                    const {motion, duration, delay, easing, margin} = attributes;
-                    const handleReset = () => {
-                        setAttributes({
-                            motion: 'none',
-                            duration: undefined,
-                            delay: undefined,
-                            easing: 'ease-out',
-                            margin: undefined
-                        });
-                    };
+	if ( attributes.easing && attributes.easing !== 'none' ) {
+		extraProps[ 'data-motion-easing' ] = attributes.easing;
+	}
+	if ( attributes.duration && attributes.duration !== '0' ) {
+		extraProps[ 'data-motion-duration' ] = attributes.duration;
+	}
+	if ( attributes.delay && attributes.delay !== '0' ) {
+		extraProps[ 'data-motion-delay' ] = attributes.delay;
+	}
+	if ( attributes.margin && attributes.margin !== '0' ) {
+		extraProps[ 'data-motion-margin' ] = attributes.margin;
+	}
 
-                    return (
-                        <Fragment>
-                            <BlockEdit {...this.props} />
+	return { ...props, ...extraProps };
+};
 
-                            <InspectorControls>
-                                <PanelBody title={__('Motion', 'motion-for-wp')}>
-                                    <BaseControl>
-                                        <ComboboxControl
-                                            label={__('Animation', 'motion-for-wp')}
-                                            value={motion}
-                                            options={this.state.availableAnimations}
-                                            onChange={(value) => setAttributes({motion: value})}
-                                        />
-                                    </BaseControl>
-                                    <TextControl type={'number'}
-                                                 min={0}
-                                                 step={0.1}
-                                                 label={__('Duration (in seconds)', 'motion-for-wp')}
-                                                 value={duration}
-                                                 onChange={(value) => setAttributes({duration: value})}
-                                    />
-                                    <TextControl type={'number'}
-                                                 min={0}
-                                                 step={0.1}
-                                                 label={__('Delay (in seconds)', 'motion-for-wp')}
-                                                 value={delay}
-                                                 onChange={(value) => setAttributes({delay: value})}
-                                    />
-                                    <BaseControl>
-                                        <ComboboxControl
-                                            options={this.state.availableEasings}
-                                            label={__('Easing', 'motion-for-wp')}
-                                            value={easing}
-                                            onChange={(value) => setAttributes({easing: value})}
-                                        />
-                                    </BaseControl>
-                                    <TextControl type={'number'}
-                                                 min={0}
-                                                 step={1}
-                                                 label={__('Margin (in pixels)', 'motion-for-wp')}
-                                                 value={margin}
-                                                 onChange={(value) => setAttributes({margin: value})}
-                                    />
-                                    <ButtonGroup>
-                                        <Button onClick={() => handleReset()}>
-                                            {__('Reset Motion', 'motion-for-wp')}
-                                        </Button>
-                                    </ButtonGroup>
-                                </PanelBody>
-                            </InspectorControls>
-                        </Fragment>
-                    );
-                }
-            };
-        }, 'addAdvancedControls'),
-
-        addExtraProps(props, blockType, attributes) {
-            if (attributes.motion === 'none') {
-                delete props['data-motion']
-                delete props['data-motion-animation']
-                delete props['data-motion-duration']
-                delete props['data-motion-delay']
-                delete props['data-motion-easing']
-                delete props['data-motion-margin']
-            } else {
-                props['data-motion'] = true;
-                props['data-motion-animation'] = attributes.motion;
-
-                if (attributes.easing !== 'none') {
-                    props['data-motion-easing'] = attributes.easing;
-                } else {
-                    delete props['data-motion-easing']
-                }
-
-                if (attributes.duration !== '0') {
-                    props['data-motion-duration'] = attributes.duration;
-                } else {
-                    delete props['data-motion-duration']
-                }
-
-                if (attributes.delay !== '0') {
-                    props['data-motion-delay'] = attributes.delay;
-                } else {
-                    delete props['data-motion-delay']
-                }
-
-                if (attributes.margin !== '0') {
-                    props['data-motion-margin'] = attributes.margin;
-                } else {
-                    delete props['data-motion-margin']
-                }
-            }
-            return props;
-        }
-    }
+export function registerMotionHooks() {
+	addFilter(
+		'blocks.registerBlockType',
+		`${ namespace }/custom-attributes`,
+		addAttributes
+	);
+	addFilter(
+		'editor.BlockEdit',
+		`${ namespace }/advanced-control`,
+		addAdvancedControls
+	);
+	addFilter(
+		'blocks.getSaveContent.extraProps',
+		`${ namespace }/extra-props`,
+		addExtraProps
+	);
 }

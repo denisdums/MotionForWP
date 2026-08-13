@@ -1,55 +1,50 @@
 <?php
-
-use MotionForWP\API;
-use MotionForWP\Assets;
-use MotionForWP\Blocks;
-use MotionForWP\ConfigFiles;
-use MotionForWP\Options;
-use MotionForWP\Translations;
-
 /**
  * Plugin Name:       Motion For WP
  * Description:       Put the magic of motion in your Gutenberg blocks.
- * Requires at least: 5.7
+ * Requires at least: 6.3
  * Requires PHP:      7.4
- * Version:           0.9.4
+ * Version:           0.10.0
  * Author:            denisdums
  * Author URI:        https://denisdums.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       motion-for-wp
+ * Domain Path:       /languages
  *
- * @package           motion-for-wp
+ * @package MotionForWP
  */
 
+declare( strict_types=1 );
 
-class MotionForWP
-{
-	public function boot(): void
-	{
-		$this->setConstants();
-		$this->registerAutoload();
-
-		Blocks::boot();
-		API::boot();
-		Assets::boot();
-		Options::boot();
-        Translations::boot();
-        ConfigFiles::boot();
-	}
-
-	public function setConstants(): void
-	{
-		define('MOTION_FOR_WP_DIR', plugin_dir_path(__FILE__));
-		define('MOTION_FOR_WP_URL', plugin_dir_url(__FILE__));
-		define('MOTION_FOR_WP_TEXT_DOMAIN', 'motion-for-wp');
-	}
-
-	public function registerAutoload(): void
-	{
-		require_once MOTION_FOR_WP_DIR . '/vendor/autoload.php';
-	}
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-$motionForWP = new MotionForWP();
-$motionForWP->boot();
+define( 'MOTION_FOR_WP_VERSION', '0.10.0' );
+define( 'MOTION_FOR_WP_FILE', __FILE__ );
+define( 'MOTION_FOR_WP_PATH', plugin_dir_path( __FILE__ ) );
+define( 'MOTION_FOR_WP_URL', plugin_dir_url( __FILE__ ) );
+
+// Backward-compatible aliases used by legacy integrations.
+define( 'MOTION_FOR_WP_DIR', MOTION_FOR_WP_PATH );
+define( 'MOTION_FOR_WP_TEXT_DOMAIN', 'motion-for-wp' );
+
+spl_autoload_register(
+	static function ( string $class_name ): void {
+		$namespace = 'MotionForWP\\';
+
+		if ( 0 !== strncmp( $class_name, $namespace, strlen( $namespace ) ) ) {
+			return;
+		}
+
+		$relative_class = substr( $class_name, strlen( $namespace ) );
+		$class_file     = MOTION_FOR_WP_PATH . 'src/' . str_replace( '\\', '/', $relative_class ) . '.php';
+
+		if ( is_readable( $class_file ) ) {
+			require_once $class_file;
+		}
+	}
+);
+
+MotionForWP\Plugin::boot();

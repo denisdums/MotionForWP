@@ -1,7 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-[data-motion]{
+html.motion-for-wp-ready [data-motion] {
 	opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	html.motion-for-wp-ready [data-motion] {
+		opacity: 1;
+	}
 }

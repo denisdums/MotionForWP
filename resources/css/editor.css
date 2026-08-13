@@ -1,0 +1,32 @@
+.motion-for-wp-inspector {
+	display: grid;
+	padding: 16px;
+	border-top: 1px solid #ddd;
+}
+
+.motion-for-wp-inspector__title {
+	margin: 0;
+	font-size: inherit;
+}
+
+.motion-for-wp-inspector__preview {
+	display: grid;
+	min-height: 72px;
+	place-items: center;
+	overflow: hidden;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	background: #f6f7f7;
+}
+
+.motion-for-wp-inspector__preview-target {
+	display: block;
+	width: 28px;
+	height: 28px;
+	border-radius: 2px;
+	background: var(--wp-admin-theme-color, #3858e9);
+}
+
+.motion-for-wp-inspector .components-base-control__help {
+	margin-bottom: 0;
+}

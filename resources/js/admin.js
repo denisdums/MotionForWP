@@ -1,3 +1,4 @@
-import {motionHooks} from "./hooks/hooks";
+import { registerMotionHooks } from './hooks/hooks';
+import '../css/editor.css';
 
-motionHooks().register();
+registerMotionHooks();

@@ -1,36 +1,59 @@
 {
 	"name": "motion-for-wp",
-	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"version": "0.10.0",
+	"description": "Animation controls and blocks for the WordPress block editor.",
+	"author": "Denis Dumont",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
+	"private": true,
+	"keywords": [
+		"wordpress",
+		"gutenberg",
+		"animation",
+		"blocks"
+	],
+	"homepage": "https://github.com/denisdums/MotionForWP",
+	"repository": "github:denisdums/MotionForWP",
+	"bugs": "https://github.com/denisdums/MotionForWP/issues",
+	"engines": {
+		"node": ">=20",
+		"npm": ">=10"
+	},
+	"files": [
+		"dist",
+		"languages",
+		"resources/animations",
+		"resources/css/admin-design-system.css",
+		"resources/css/admin-theme.css",
+		"resources/icons",
+		"src",
+		"motion-for-gutenberg.php",
+		"README.txt"
+	],
+	"devDependencies": {
+		"@wordpress/block-editor": "^11.8.0",
+		"@wordpress/blocks": "^15.26.0",
+		"@wordpress/components": "^23.8.0",
+		"@wordpress/compose": "^8.6.0",
+		"@wordpress/element": "^5.8.0",
+		"@wordpress/hooks": "^3.31.0",
+		"@wordpress/i18n": "^4.31.0",
+		"@wordpress/icons": "^9.49.0",
+		"@wordpress/scripts": "^34.1.0",
+		"mini-css-extract-plugin": "^2.9.2",
+		"motion": "^10.15.5"
+	},
 	"scripts": {
-		"start": "TAILWIND_MODE=watch npx mix watch & npm run gutenberg:start",
-		"build": "TAILWIND_MODE=build npx mix --production & wp-scripts build",
+		"start": "wp-scripts start --webpack-src-dir=./resources/blocks --output-path=./dist/blocks",
+		"build": "npm run assets:build && npm run gutenberg:build",
+		"assets:start": "MOTION_FOR_WP_BUILD_TARGET=assets wp-scripts start",
+		"assets:build": "MOTION_FOR_WP_BUILD_TARGET=assets wp-scripts build",
 		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
+		"lint:css": "wp-scripts lint-style 'resources/**/*.{css,scss}'",
+		"lint:js": "wp-scripts lint-js resources webpack.config.js babel.config.js",
+		"lint:package": "wp-scripts lint-pkg-json",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"gutenberg:start": "wp-scripts start --webpack-src-dir=./resources/blocks --output-path=./dist/blocks",
 		"gutenberg:build": "wp-scripts build --webpack-src-dir=./resources/blocks --output-path=./dist/blocks"
-	},
-	"devDependencies": {
-		"@wordpress/scripts": "^26.2.0",
-		"laravel-mix": "^6.0.49",
-		"resolve-url-loader": "^5.0.0",
-		"tailwindcss": "^3.3.3"
-	},
-	"dependencies": {
-		"@babel/preset-env": "^7.21.4",
-		"@babel/preset-react": "^7.18.6",
-		"@wordpress/block-editor": "^11.8.0",
-		"@wordpress/components": "^23.8.0",
-		"@wordpress/element": "^5.8.0",
-		"@wordpress/hooks": "^3.31.0",
-		"@wordpress/i18n": "^4.31.0",
-		"@wordpress/icons": "^9.22.0",
-		"motion": "^10.15.5"
 	}
 }

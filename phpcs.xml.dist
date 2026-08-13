@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<ruleset name="Motion for WP">
+	<description>WordPress Coding Standards for Motion for WP.</description>
+
+	<file>motion-for-wp.php</file>
+	<file>src</file>
+	<file>tests</file>
+
+	<arg name="basepath" value="."/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+	<config name="testVersion" value="7.4-"/>
+
+	<rule ref="WordPress"/>
+	<rule ref="WordPress-Docs"/>
+	<rule ref="WordPress-Extra"/>
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>src/*</exclude-pattern>
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+	<rule ref="Generic.PHP.RequireStrictTypes"/>
+	<rule ref="WordPress.NamingConventions.ValidHookName.UseUnderscores">
+		<exclude-pattern>src/*</exclude-pattern>
+	</rule>
+
+	<exclude-pattern>dist/*</exclude-pattern>
+	<exclude-pattern>node_modules/*</exclude-pattern>
+	<exclude-pattern>vendor/*</exclude-pattern>
+</ruleset>

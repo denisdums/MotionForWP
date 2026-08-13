@@ -1,0 +1,26 @@
+/**
+ * Motion for WP admin theme.
+ */
+
+.plugin-admin--motion-for-wp {
+	--plugin-admin-primary: #246df6;
+	--plugin-admin-primary-hover: #1554c5;
+	--plugin-admin-on-primary: #fff;
+	--plugin-admin-accent: #fff8b8;
+}
+
+.plugin-admin--motion-for-wp .plugin-admin__hero {
+	background: linear-gradient(135deg, #1554c5 0%, #246df6 68%, #ffeb00 180%);
+}
+
+.plugin-admin--motion-for-wp .plugin-admin__hero::after {
+	background: #ffeb00;
+	border-radius: 999px;
+	content: "";
+	height: 180px;
+	opacity: 0.22;
+	position: absolute;
+	right: -40px;
+	top: -90px;
+	width: 180px;
+}
