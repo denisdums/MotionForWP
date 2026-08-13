@@ -109,7 +109,7 @@ final class Settings_Page implements Service {
 
 		add_settings_field(
 			'motion_for_wp_preview_enabled',
-			esc_html__( 'Block previews', 'motion-for-wp' ),
+			esc_html__( 'Editor preview mode', 'motion-for-wp' ),
 			array( $this, 'render_preview_field' ),
 			Options::OPTION_NAME,
 			'motion_for_wp_editor'
@@ -119,6 +119,30 @@ final class Settings_Page implements Service {
 			'motion_for_wp_repeat',
 			esc_html__( 'Playback', 'motion-for-wp' ),
 			array( $this, 'render_repeat_field' ),
+			Options::OPTION_NAME,
+			'motion_for_wp_editor'
+		);
+
+		add_settings_field(
+			'motion_for_wp_mobile_behavior',
+			esc_html__( 'Mobile behavior', 'motion-for-wp' ),
+			array( $this, 'render_mobile_behavior_field' ),
+			Options::OPTION_NAME,
+			'motion_for_wp_editor'
+		);
+
+		add_settings_field(
+			'motion_for_wp_concurrent_limit',
+			esc_html__( 'Simultaneous animations', 'motion-for-wp' ),
+			array( $this, 'render_concurrent_limit_field' ),
+			Options::OPTION_NAME,
+			'motion_for_wp_editor'
+		);
+
+		add_settings_field(
+			'motion_for_wp_stagger_enabled',
+			esc_html__( 'Group staggering', 'motion-for-wp' ),
+			array( $this, 'render_stagger_field' ),
 			Options::OPTION_NAME,
 			'motion_for_wp_editor'
 		);
@@ -206,6 +230,8 @@ final class Settings_Page implements Service {
 		$easing            = isset( $input['easing'] ) ? sanitize_key( $input['easing'] ) : 'ease-in-out';
 		$default_animation = isset( $input['default_animation'] ) ? sanitize_key( $input['default_animation'] ) : 'none';
 		$repeat            = isset( $input['repeat'] ) ? sanitize_key( $input['repeat'] ) : 'once';
+		$preview_mode      = isset( $input['preview_mode'] ) ? sanitize_key( $input['preview_mode'] ) : 'automatic';
+		$mobile_behavior   = isset( $input['mobile_behavior'] ) ? sanitize_key( $input['mobile_behavior'] ) : 'same';
 
 		if ( ! isset( $easings[ $easing ] ) ) {
 			$easing = 'ease-in-out';
@@ -216,12 +242,23 @@ final class Settings_Page implements Service {
 		if ( ! in_array( $repeat, array( 'once', 'always' ), true ) ) {
 			$repeat = 'once';
 		}
+		if ( ! in_array( $preview_mode, array( 'automatic', 'manual', 'disabled' ), true ) ) {
+			$preview_mode = 'automatic';
+		}
+		if ( ! in_array( $mobile_behavior, array( 'same', 'simplified', 'disabled' ), true ) ) {
+			$mobile_behavior = 'same';
+		}
 
 		$sanitized = array(
 			'enabled'           => ! empty( $input['enabled'] ),
 			'reduced_motion'    => ! empty( $input['reduced_motion'] ),
-			'preview_enabled'   => ! empty( $input['preview_enabled'] ),
+			'preview_enabled'   => 'disabled' !== $preview_mode,
+			'preview_mode'      => $preview_mode,
 			'repeat'            => $repeat,
+			'mobile_behavior'   => $mobile_behavior,
+			'concurrent_limit'  => (int) $this->sanitize_number( $input['concurrent_limit'] ?? 0, 0, 20, 0 ),
+			'stagger_enabled'   => ! empty( $input['stagger_enabled'] ),
+			'stagger_delay'     => $this->sanitize_number( $input['stagger_delay'] ?? 0.1, 0, 5, 0.1 ),
 			'default_animation' => $default_animation,
 			'duration'          => $this->sanitize_number( $input['duration'] ?? 0.5, 0, 60, 0.5 ),
 			'delay'             => $this->sanitize_number( $input['delay'] ?? 0, 0, 60, 0 ),
@@ -245,7 +282,12 @@ final class Settings_Page implements Service {
 				'enabled',
 				'reduced_motion',
 				'preview_enabled',
+				'preview_mode',
 				'repeat',
+				'mobile_behavior',
+				'concurrent_limit',
+				'stagger_enabled',
+				'stagger_delay',
 				'default_animation',
 				'duration',
 				'delay',
@@ -285,6 +327,7 @@ final class Settings_Page implements Service {
 					/>
 				</div>
 			</div>
+			<?php $this->render_status_summary(); ?>
 			<form action="options.php" method="post" class="plugin-admin__settings-form">
 				<?php settings_fields( Options::OPTION_NAME ); ?>
 				<div class="plugin-admin__settings-grid">
@@ -311,6 +354,7 @@ final class Settings_Page implements Service {
 						</div>
 					</section>
 				</div>
+				<?php $this->render_help_panel(); ?>
 				<div class="plugin-admin__actions">
 					<?php submit_button( __( 'Save settings', 'motion-for-wp' ), 'primary', 'submit', false ); ?>
 				</div>
@@ -324,6 +368,7 @@ final class Settings_Page implements Service {
 	 */
 	public function render_section(): void {
 		echo '<p>' . esc_html__( 'Set the default parameters used when a block does not define its own values.', 'motion-for-wp' ) . '</p>';
+		echo '<p class="plugin-admin__callout"><strong>' . esc_html__( 'Value priority:', 'motion-for-wp' ) . '</strong> ' . esc_html__( 'Settings defined directly on a block override these global defaults.', 'motion-for-wp' ) . '</p>';
 	}
 
 	/**
@@ -331,6 +376,51 @@ final class Settings_Page implements Service {
 	 */
 	public function render_editor_section(): void {
 		echo '<p>' . esc_html__( 'Control animations globally, accessibility preferences, playback, and editor previews.', 'motion-for-wp' ) . '</p>';
+	}
+
+	/** Renders a compact status overview. */
+	private function render_status_summary(): void {
+		$options      = $this->options->get();
+		$preview_mode = $options['preview_mode'] ?? 'automatic';
+		$preview_text = array(
+			'automatic' => __( 'Automatic', 'motion-for-wp' ),
+			'manual'    => __( 'On demand', 'motion-for-wp' ),
+			'disabled'  => __( 'Disabled', 'motion-for-wp' ),
+		);
+		?>
+		<section class="plugin-admin__status" aria-labelledby="motion-for-wp-status-title">
+			<h2 id="motion-for-wp-status-title" class="screen-reader-text"><?php echo esc_html__( 'Plugin status summary', 'motion-for-wp' ); ?></h2>
+			<div class="plugin-admin__status-item">
+				<span><?php echo esc_html__( 'Frontend animations', 'motion-for-wp' ); ?></span>
+				<strong class="<?php echo ! empty( $options['enabled'] ) ? 'is-positive' : ''; ?>"><?php echo ! empty( $options['enabled'] ) ? esc_html__( 'Active', 'motion-for-wp' ) : esc_html__( 'Disabled', 'motion-for-wp' ); ?></strong>
+			</div>
+			<div class="plugin-admin__status-item">
+				<span><?php echo esc_html__( 'Editor previews', 'motion-for-wp' ); ?></span>
+				<strong><?php echo esc_html( $preview_text[ $preview_mode ] ?? $preview_text['automatic'] ); ?></strong>
+			</div>
+			<div class="plugin-admin__status-item">
+				<span><?php echo esc_html__( 'Reduced motion', 'motion-for-wp' ); ?></span>
+				<strong class="<?php echo ! empty( $options['reduced_motion'] ) ? 'is-positive' : ''; ?>"><?php echo ! empty( $options['reduced_motion'] ) ? esc_html__( 'Respected', 'motion-for-wp' ) : esc_html__( 'Overridden', 'motion-for-wp' ); ?></strong>
+			</div>
+		</section>
+		<?php
+	}
+
+	/** Renders performance guidance and support links. */
+	private function render_help_panel(): void {
+		?>
+		<section class="plugin-admin__help" aria-labelledby="motion-for-wp-help-title">
+			<div>
+				<h2 id="motion-for-wp-help-title"><?php echo esc_html__( 'Useful information', 'motion-for-wp' ); ?></h2>
+				<p><strong><?php echo esc_html__( 'Performance tip:', 'motion-for-wp' ); ?></strong> <?php echo esc_html__( 'Prefer short animations and avoid animating many large blocks simultaneously. A concurrency limit can smooth complex pages.', 'motion-for-wp' ); ?></p>
+			</div>
+			<nav class="plugin-admin__help-links" aria-label="<?php echo esc_attr__( 'MotionForWP resources', 'motion-for-wp' ); ?>">
+				<a href="https://github.com/denisdums/MotionForWP#readme" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Documentation', 'motion-for-wp' ); ?></a>
+				<a href="https://github.com/denisdums/MotionForWP/releases" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Changelog', 'motion-for-wp' ); ?></a>
+				<a href="https://github.com/denisdums/MotionForWP/issues/new" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Report an issue', 'motion-for-wp' ); ?></a>
+			</nav>
+		</section>
+		<?php
 	}
 
 	/** Renders the global plugin toggle. */
@@ -355,11 +445,56 @@ final class Settings_Page implements Service {
 	 * Renders the editor preview toggle.
 	 */
 	public function render_preview_field(): void {
+		$options = $this->options->get();
+		$current = $options['preview_mode'] ?? 'automatic';
+		?>
+		<select name="<?php echo esc_attr( Options::OPTION_NAME . '[preview_mode]' ); ?>">
+			<option value="automatic" <?php selected( $current, 'automatic' ); ?>><?php echo esc_html__( 'Automatic previews', 'motion-for-wp' ); ?></option>
+			<option value="manual" <?php selected( $current, 'manual' ); ?>><?php echo esc_html__( 'On demand only', 'motion-for-wp' ); ?></option>
+			<option value="disabled" <?php selected( $current, 'disabled' ); ?>><?php echo esc_html__( 'Disabled', 'motion-for-wp' ); ?></option>
+		</select>
+		<p class="description"><?php echo esc_html__( 'Choose whether previews play automatically, only after using a replay action, or remain hidden. Frontend animations are unaffected.', 'motion-for-wp' ); ?></p>
+		<?php
+	}
+
+	/** Renders mobile animation behavior. */
+	public function render_mobile_behavior_field(): void {
+		$options = $this->options->get();
+		$current = $options['mobile_behavior'] ?? 'same';
+		?>
+		<select name="<?php echo esc_attr( Options::OPTION_NAME . '[mobile_behavior]' ); ?>">
+			<option value="same" <?php selected( $current, 'same' ); ?>><?php echo esc_html__( 'Same as desktop', 'motion-for-wp' ); ?></option>
+			<option value="simplified" <?php selected( $current, 'simplified' ); ?>><?php echo esc_html__( 'Simplified fade', 'motion-for-wp' ); ?></option>
+			<option value="disabled" <?php selected( $current, 'disabled' ); ?>><?php echo esc_html__( 'Disable on mobile', 'motion-for-wp' ); ?></option>
+		</select>
+		<p class="description"><?php echo esc_html__( 'Mobile applies at WordPress’s 782 px admin breakpoint. Simplified mode replaces directional movement with a fade.', 'motion-for-wp' ); ?></p>
+		<?php
+	}
+
+	/** Renders the concurrent animation limit. */
+	public function render_concurrent_limit_field(): void {
+		$options = $this->options->get();
+		?>
+		<input type="number" class="small-text" name="<?php echo esc_attr( Options::OPTION_NAME . '[concurrent_limit]' ); ?>" value="<?php echo esc_attr( (string) ( $options['concurrent_limit'] ?? 0 ) ); ?>" min="0" max="20" step="1" />
+		<p class="description"><?php echo esc_html__( 'Maximum animations started at the same time. Use 0 for no limit.', 'motion-for-wp' ); ?></p>
+		<?php
+	}
+
+	/** Renders automatic staggering controls. */
+	public function render_stagger_field(): void {
+		$options = $this->options->get();
 		$this->render_checkbox_field(
-			'preview_enabled',
-			__( 'Enable animation previews in the block editor', 'motion-for-wp' ),
-			__( 'When disabled, illustrative previews and replay actions are hidden. Frontend animations remain active.', 'motion-for-wp' )
+			'stagger_enabled',
+			__( 'Progressively delay animated sibling blocks', 'motion-for-wp' ),
+			__( 'Useful for columns, rows, and lists whose direct child blocks animate together.', 'motion-for-wp' )
 		);
+		?>
+		<label class="plugin-admin__inline-field">
+			<span><?php echo esc_html__( 'Delay between blocks', 'motion-for-wp' ); ?></span>
+			<input type="number" class="small-text" name="<?php echo esc_attr( Options::OPTION_NAME . '[stagger_delay]' ); ?>" value="<?php echo esc_attr( (string) ( $options['stagger_delay'] ?? 0.1 ) ); ?>" min="0" max="5" step="0.05" />
+			<span><?php echo esc_html_x( 'seconds', 'time unit', 'motion-for-wp' ); ?></span>
+		</label>
+		<?php
 	}
 
 	/** Renders the global repeat behavior. */
@@ -416,6 +551,9 @@ final class Settings_Page implements Service {
 		/>
 		<?php if ( 'duration' === $name || 'delay' === $name ) : ?>
 			<span class="plugin-admin__unit"><?php echo esc_html_x( 'seconds', 'time unit', 'motion-for-wp' ); ?></span>
+			<?php if ( 'delay' === $name ) : ?>
+				<p class="description"><?php echo esc_html__( 'A value of 0 starts the animation immediately.', 'motion-for-wp' ); ?></p>
+			<?php endif; ?>
 		<?php elseif ( 'margin' === $name ) : ?>
 			<span class="plugin-admin__unit"><?php echo esc_html_x( 'pixels', 'length unit', 'motion-for-wp' ); ?></span>
 		<?php elseif ( 'threshold' === $name ) : ?>

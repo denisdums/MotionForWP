@@ -9,6 +9,8 @@ const runtime = window.motionForWP || {
 export function InViewManager() {
 	return {
 		inViewElements: null,
+		activeAnimations: 0,
+		animationQueue: [],
 
 		init() {
 			this.bind();
@@ -37,10 +39,57 @@ export function InViewManager() {
 
 		handleInViewEvent( infos ) {
 			const motionTarget = new MotionTarget( infos );
-			motionTarget.animate();
+			const queuedAnimation = {
+				cancelled: false,
+				run: () => {
+					if ( queuedAnimation.cancelled ) {
+						return;
+					}
+					this.activeAnimations += 1;
+					const controls = motionTarget.animate();
+					Promise.resolve( controls?.finished )
+						.catch( () => undefined )
+						.finally( () => {
+							this.activeAnimations = Math.max(
+								0,
+								this.activeAnimations - 1
+							);
+							this.runNextAnimation();
+						} );
+				},
+			};
+
+			this.scheduleAnimation( queuedAnimation );
 
 			if ( runtime.options.repeat === 'always' ) {
-				return () => motionTarget.stop();
+				return () => {
+					queuedAnimation.cancelled = true;
+					motionTarget.stop();
+				};
+			}
+		},
+
+		scheduleAnimation( queuedAnimation ) {
+			const limit = clampNumber(
+				runtime.options.concurrent_limit,
+				0,
+				20,
+				0
+			);
+			if ( limit > 0 && this.activeAnimations >= limit ) {
+				this.animationQueue.push( queuedAnimation );
+				return;
+			}
+			queuedAnimation.run();
+		},
+
+		runNextAnimation() {
+			let next = this.animationQueue.shift();
+			while ( next?.cancelled ) {
+				next = this.animationQueue.shift();
+			}
+			if ( next ) {
+				this.scheduleAnimation( next );
 			}
 		},
 
@@ -84,13 +133,14 @@ export class MotionTarget {
 
 	animate() {
 		if ( ! this.element || ! this.animation ) {
-			return;
+			return null;
 		}
 		this.controls = animate(
 			this.element,
 			this.animation,
 			this.animationOptions
 		);
+		return this.controls;
 	}
 
 	stop() {
@@ -98,6 +148,16 @@ export class MotionTarget {
 	}
 
 	getAnimation() {
+		if (
+			window.matchMedia( '(max-width: 782px)' ).matches &&
+			runtime.options.mobile_behavior === 'simplified'
+		) {
+			return (
+				runtime.animations?.[ 'fade-in' ]?.properties || {
+					opacity: [ 0, 1 ],
+				}
+			);
+		}
 		const animationSlug =
 			this.element.getAttribute( 'data-motion-animation' ) ||
 			runtime.options.default_animation;
@@ -116,13 +176,30 @@ export class MotionTarget {
 	}
 
 	getDelay() {
-		return clampNumber(
+		const delay = clampNumber(
 			this.element.getAttribute( 'data-motion-delay' ) ??
 				runtime.options.delay,
 			0,
 			60,
 			0
 		);
+		return delay + this.getStaggerDelay();
+	}
+
+	getStaggerDelay() {
+		if (
+			runtime.options.stagger_enabled !== true ||
+			! this.element.parentElement
+		) {
+			return 0;
+		}
+		const siblings = Array.from(
+			this.element.parentElement.children
+		).filter( ( element ) => element.matches( '[data-motion="true"]' ) );
+		const index = siblings.indexOf( this.element );
+		const step = clampNumber( runtime.options.stagger_delay, 0, 5, 0.1 );
+
+		return index > 0 ? index * step : 0;
 	}
 
 	getDuration() {

@@ -47,7 +47,10 @@ export const animationOptions = [
 		} ) ),
 ];
 
-export const previewsEnabled = runtime.options?.preview_enabled !== false;
+export const previewMode =
+	runtime.options?.preview_mode ||
+	( runtime.options?.preview_enabled === false ? 'disabled' : 'automatic' );
+export const previewsEnabled = previewMode !== 'disabled';
 export const motionEnabled = runtime.options?.enabled !== false;
 export const respectsReducedMotion = runtime.options?.reduced_motion !== false;
 

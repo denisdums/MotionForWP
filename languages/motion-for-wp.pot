@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MotionForWP 0.11.0\n"
+"Project-Id-Version: MotionForWP 0.12.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/MotionForWP\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-13T15:50:42+02:00\n"
+"POT-Creation-Date: 2026-08-13T16:03:24+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: motion-for-wp\n"
@@ -38,12 +38,12 @@ msgstr ""
 
 #: src/Admin/Settings_Page.php:66
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:108
+#: resources/js/editor/MotionInspectorControls.js:109
 msgid "Motion"
 msgstr ""
 
 #: src/Admin/Settings_Page.php:89
-#: src/Admin/Settings_Page.php:293
+#: src/Admin/Settings_Page.php:336
 msgid "Animation behavior"
 msgstr ""
 
@@ -56,7 +56,7 @@ msgid "Accessibility"
 msgstr ""
 
 #: src/Admin/Settings_Page.php:112
-msgid "Block previews"
+msgid "Editor preview mode"
 msgstr ""
 
 #: src/Admin/Settings_Page.php:120
@@ -64,113 +64,244 @@ msgid "Playback"
 msgstr ""
 
 #: src/Admin/Settings_Page.php:128
-#: src/Admin/Settings_Page.php:304
+msgid "Mobile behavior"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:136
+msgid "Simultaneous animations"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:144
+msgid "Group staggering"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:152
+#: src/Admin/Settings_Page.php:347
 msgid "Animation defaults"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:135
+#: src/Admin/Settings_Page.php:159
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:43
+#: resources/js/editor/MotionInspectorControls.js:44
 #: resources/js/editor/MotionSettingControl.js:25
 msgid "Duration"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:141
+#: src/Admin/Settings_Page.php:165
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:49
+#: resources/js/editor/MotionInspectorControls.js:50
 #: resources/js/editor/MotionSettingControl.js:31
 msgid "Delay"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:147
+#: src/Admin/Settings_Page.php:171
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:61
+#: resources/js/editor/MotionInspectorControls.js:62
 #: resources/js/editor/MotionSettingControl.js:37
 msgid "Viewport margin"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:167
+#: src/Admin/Settings_Page.php:191
 msgid "Default animation"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:175
+#: src/Admin/Settings_Page.php:199
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:55
+#: resources/js/editor/MotionInspectorControls.js:56
 #: resources/js/editor/MotionSettingControl.js:15
 msgid "Easing"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:183
+#: src/Admin/Settings_Page.php:207
 msgid "Visibility threshold"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:276
+#: src/Admin/Settings_Page.php:318
 msgid "Bring purposeful motion to the WordPress block editor."
 msgstr ""
 
-#: src/Admin/Settings_Page.php:315
+#: src/Admin/Settings_Page.php:359
 msgid "Save settings"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:326
+#: src/Admin/Settings_Page.php:370
 msgid "Set the default parameters used when a block does not define its own values."
 msgstr ""
 
-#: src/Admin/Settings_Page.php:333
-msgid "Control animations globally, accessibility preferences, playback, and editor previews."
+#: src/Admin/Settings_Page.php:371
+msgid "Value priority:"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:340
-msgid "Enable animations on the site"
-msgstr ""
-
-#: src/Admin/Settings_Page.php:341
-msgid "Turn off all frontend animations without deleting the settings stored on blocks."
-msgstr ""
-
-#: src/Admin/Settings_Page.php:349
-msgid "Respect the visitor’s reduced-motion preference"
-msgstr ""
-
-#: src/Admin/Settings_Page.php:350
-msgid "Recommended. Animations are skipped when the operating system requests reduced motion."
-msgstr ""
-
-#: src/Admin/Settings_Page.php:360
-msgid "Enable animation previews in the block editor"
-msgstr ""
-
-#: src/Admin/Settings_Page.php:361
-msgid "When disabled, illustrative previews and replay actions are hidden. Frontend animations remain active."
-msgstr ""
-
-#: src/Admin/Settings_Page.php:372
-msgid "Play once"
-msgstr ""
-
-#: src/Admin/Settings_Page.php:375
-msgid "Replay each time the block enters the viewport"
+#: src/Admin/Settings_Page.php:371
+msgid "Settings defined directly on a block override these global defaults."
 msgstr ""
 
 #: src/Admin/Settings_Page.php:378
-msgid "Controls whether an animation may run again after leaving the viewport."
+msgid "Control animations globally, accessibility preferences, playback, and editor previews."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:386
+msgid "Automatic"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:387
+msgid "On demand"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:388
+#: src/Admin/Settings_Page.php:395
+#: src/Admin/Settings_Page.php:454
+msgid "Disabled"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:392
+msgid "Plugin status summary"
 msgstr ""
 
 #: src/Admin/Settings_Page.php:394
-msgid "Applied when a supported block does not define its own animation. “None” preserves the current opt-in behavior."
+msgid "Frontend animations"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:395
+msgid "Active"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:398
+msgid "Editor previews"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:402
+msgid "Reduced motion"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:403
+msgid "Respected"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:403
+msgid "Overridden"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:414
+msgid "Useful information"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:415
+msgid "Performance tip:"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:415
+msgid "Prefer short animations and avoid animating many large blocks simultaneously. A concurrency limit can smooth complex pages."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:417
+msgid "MotionForWP resources"
 msgstr ""
 
 #: src/Admin/Settings_Page.php:418
+msgid "Documentation"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:419
+msgid "Changelog"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:420
+msgid "Report an issue"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:430
+msgid "Enable animations on the site"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:431
+msgid "Turn off all frontend animations without deleting the settings stored on blocks."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:439
+msgid "Respect the visitor’s reduced-motion preference"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:440
+msgid "Recommended. Animations are skipped when the operating system requests reduced motion."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:452
+msgid "Automatic previews"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:453
+msgid "On demand only"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:456
+msgid "Choose whether previews play automatically, only after using a replay action, or remain hidden. Frontend animations are unaffected."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:466
+msgid "Same as desktop"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:467
+msgid "Simplified fade"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:468
+msgid "Disable on mobile"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:470
+msgid "Mobile applies at WordPress’s 782 px admin breakpoint. Simplified mode replaces directional movement with a fade."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:479
+msgid "Maximum animations started at the same time. Use 0 for no limit."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:488
+msgid "Progressively delay animated sibling blocks"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:489
+msgid "Useful for columns, rows, and lists whose direct child blocks animate together."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:493
+msgid "Delay between blocks"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:495
+#: src/Admin/Settings_Page.php:553
 msgctxt "time unit"
 msgid "seconds"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:420
+#: src/Admin/Settings_Page.php:507
+msgid "Play once"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:510
+msgid "Replay each time the block enters the viewport"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:513
+msgid "Controls whether an animation may run again after leaving the viewport."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:529
+msgid "Applied when a supported block does not define its own animation. “None” preserves the current opt-in behavior."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:555
+msgid "A value of 0 starts the animation immediately."
+msgstr ""
+
+#: src/Admin/Settings_Page.php:558
 msgctxt "length unit"
 msgid "pixels"
 msgstr ""
 
-#: src/Admin/Settings_Page.php:423
+#: src/Admin/Settings_Page.php:561
 msgid "Percentage of the block that must be visible before its animation starts. Zero starts as soon as it enters the viewport."
 msgstr ""
 
@@ -259,25 +390,25 @@ msgstr ""
 #: dist/js/admin.js:2
 #: dist/js/admin.js:3
 #: resources/js/editor/runtime.js:33
-#: resources/js/editor/runtime.js:63
+#: resources/js/editor/runtime.js:66
 #, js-format
 msgid "Use global setting (%s)"
 msgstr ""
 
 #. translators: 1: global setting value, 2: unit.
 #: dist/js/admin.js:4
-#: resources/js/editor/runtime.js:79
+#: resources/js/editor/runtime.js:82
 #, js-format
 msgid "Leave empty to use the global value: %1$s %2$s."
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionAnimationPreview.js:46
+#: resources/js/editor/MotionAnimationPreview.js:60
 msgid "Preview"
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionAnimationPreview.js:50
+#: resources/js/editor/MotionAnimationPreview.js:64
 msgid "Replay preview"
 msgstr ""
 
@@ -297,27 +428,27 @@ msgid "Reset all"
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:126
+#: resources/js/editor/MotionInspectorControls.js:127
 msgid "Animation"
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:127
+#: resources/js/editor/MotionInspectorControls.js:128
 msgid "Choose how this block appears in the viewport."
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:141
+#: resources/js/editor/MotionInspectorControls.js:142
 msgid "Animations are globally disabled in Motion settings. Block configuration is preserved."
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:179
+#: resources/js/editor/MotionInspectorControls.js:181
 msgid "Animation previews are disabled because reduced motion is enabled in your system settings."
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:190
+#: resources/js/editor/MotionInspectorControls.js:192
 msgid "The animation preview is unavailable for this block."
 msgstr ""
 

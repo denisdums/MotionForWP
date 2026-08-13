@@ -21,6 +21,11 @@ final class Options {
 	public function get(): array {
 		$options = get_option( self::OPTION_NAME, array() );
 		$options = is_array( $options ) ? $options : array();
+
+		// Keep installations created before preview modes backward compatible.
+		if ( ! isset( $options['preview_mode'] ) ) {
+			$options['preview_mode'] = isset( $options['preview_enabled'] ) && false === $options['preview_enabled'] ? 'disabled' : 'automatic';
+		}
 		$options = wp_parse_args( $options, self::defaults() );
 
 		/**
@@ -43,7 +48,12 @@ final class Options {
 			'enabled'           => true,
 			'reduced_motion'    => true,
 			'preview_enabled'   => true,
+			'preview_mode'      => 'automatic',
 			'repeat'            => 'once',
+			'mobile_behavior'   => 'same',
+			'concurrent_limit'  => 0,
+			'stagger_enabled'   => false,
+			'stagger_delay'     => 0.1,
 			'default_animation' => 'none',
 			'duration'          => 0.5,
 			'delay'             => 0,

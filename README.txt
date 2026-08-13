@@ -3,7 +3,7 @@ Contributors: denisdums
 Tags: motion, gutenberg, motion for wp, animations, blocks
 Requires at least: 6.3
 Tested up to: 7.0
-Stable tag: 0.11.0
+Stable tag: 0.12.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,8 @@ inspector, optionally override its duration, delay, easing or viewport margin, a
 The controls follow the native WordPress interface. Each optional property inherits the global plugin setting until
 you explicitly enable and change it. The Motion settings page can disable frontend animations without deleting block
 configuration, respect the visitor's reduced-motion preference, control replay behavior and visibility threshold,
-choose a default animation, and disable editor previews independently.
+choose a default animation, configure editor preview modes, adapt motion on mobile, limit simultaneous animations,
+and progressively stagger animated sibling blocks.
 
 == Usage ==
 
@@ -62,6 +63,14 @@ plugins/motion-for-wp/.wordpress-org/screenshot-1.png
 plugins/motion-for-wp/.wordpress-org/screenshot-2.png
 
 == Changelog ==
+
+= 0.12.0 =
+
+- Added automatic, on-demand and disabled editor preview modes with backward-compatible option migration.
+- Added mobile animation behavior with unchanged, simplified fade and disabled modes.
+- Added a configurable simultaneous-animation limit and progressive staggering for animated sibling blocks.
+- Added a status summary, setting-priority guidance, performance advice and support links to the admin page.
+- Improved responsive settings layout, accessibility text and complete French translations.
 
 = 0.11.0 =
 

@@ -9,6 +9,7 @@ import { MotionSettingControl } from './MotionSettingControl';
 import {
 	animationOptions,
 	motionEnabled,
+	previewMode,
 	previewsEnabled,
 	runtime,
 } from './runtime';
@@ -169,6 +170,7 @@ export function MotionInspectorControls( {
 						delay={ delay }
 						easing={ easing }
 						reducedMotion={ reducedMotion }
+						autoPlay={ previewMode === 'automatic' }
 					/>
 				) }
 				{ reducedMotion &&

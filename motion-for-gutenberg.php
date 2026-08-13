@@ -4,7 +4,7 @@
  * Description:       Put the magic of motion in your Gutenberg blocks.
  * Requires at least: 6.3
  * Requires PHP:      7.4
- * Version:           0.11.0
+ * Version:           0.12.0
  * Author:            denisdums
  * Author URI:        https://denisdums.com
  * License:           GPL-2.0-or-later
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MOTION_FOR_WP_VERSION', '0.11.0' );
+define( 'MOTION_FOR_WP_VERSION', '0.12.0' );
 define( 'MOTION_FOR_WP_FILE', __FILE__ );
 define( 'MOTION_FOR_WP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MOTION_FOR_WP_URL', plugin_dir_url( __FILE__ ) );

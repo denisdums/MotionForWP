@@ -14,13 +14,19 @@ export function MotionAnimationPreview( {
 	duration,
 	easing,
 	reducedMotion,
+	autoPlay = true,
 } ) {
 	const target = useRef();
 	const [ replayKey, setReplayKey ] = useState( 0 );
 
 	useEffect( () => {
 		const animation = runtime.animations?.[ animationSlug ];
-		if ( reducedMotion || ! target.current || ! animation?.properties ) {
+		if (
+			reducedMotion ||
+			( ! autoPlay && replayKey === 0 ) ||
+			! target.current ||
+			! animation?.properties
+		) {
 			return undefined;
 		}
 
@@ -35,7 +41,15 @@ export function MotionAnimationPreview( {
 		} );
 
 		return () => controls.cancel();
-	}, [ animationSlug, delay, duration, easing, reducedMotion, replayKey ] );
+	}, [
+		animationSlug,
+		autoPlay,
+		delay,
+		duration,
+		easing,
+		reducedMotion,
+		replayKey,
+	] );
 
 	return (
 		<BaseControl
