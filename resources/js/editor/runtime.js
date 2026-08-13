@@ -22,7 +22,19 @@ export const resolveMotionEasing = ( value ) => {
 	);
 };
 
+const globalAnimation =
+	runtime.animations?.[ runtime.options?.default_animation ]?.name ||
+	__( 'No animation', 'motion-for-wp' );
+
 export const animationOptions = [
+	{
+		label: sprintf(
+			/* translators: %s: global setting name. */
+			__( 'Use global setting (%s)', 'motion-for-wp' ),
+			globalAnimation
+		),
+		value: 'global',
+	},
 	{
 		label: __( 'No animation', 'motion-for-wp' ),
 		value: 'none',
@@ -35,6 +47,10 @@ export const animationOptions = [
 		} ) ),
 ];
 
+export const previewsEnabled = runtime.options?.preview_enabled !== false;
+export const motionEnabled = runtime.options?.enabled !== false;
+export const respectsReducedMotion = runtime.options?.reduced_motion !== false;
+
 const globalEasing =
 	runtime.easings?.[ runtime.options?.easing ]?.name ||
 	runtime.options?.easing ||
@@ -43,7 +59,7 @@ const globalEasing =
 export const easingOptions = [
 	{
 		label: sprintf(
-			/* translators: %s: global easing name. */
+			/* translators: %s: global setting name. */
 			__( 'Use global setting (%s)', 'motion-for-wp' ),
 			globalEasing
 		),

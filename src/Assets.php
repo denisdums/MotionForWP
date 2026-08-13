@@ -46,6 +46,61 @@ final class Assets implements Service {
 	public function register(): void {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_front_assets' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_assets' ) );
+		add_filter( 'render_block', array( $this, 'apply_default_animation' ), 10, 2 );
+	}
+
+	/**
+	 * Applies the global animation to eligible blocks without an explicit choice.
+	 *
+	 * @param string              $block_content Rendered block markup.
+	 * @param array<string,mixed> $block         Parsed block data.
+	 * @return string
+	 */
+	public function apply_default_animation( string $block_content, array $block ): string {
+		$options           = $this->options->get();
+		$default_animation = (string) ( $options['default_animation'] ?? 'none' );
+		$attributes        = isset( $block['attrs'] ) && is_array( $block['attrs'] ) ? $block['attrs'] : array();
+		$selected          = isset( $attributes['motion'] ) ? (string) $attributes['motion'] : 'global';
+		$block_name        = isset( $block['blockName'] ) ? (string) $block['blockName'] : '';
+
+		if (
+			empty( $options['enabled'] ) ||
+			'none' === $default_animation ||
+			'none' === $selected ||
+			! in_array( $selected, array( '', 'global' ), true ) ||
+			'' === $block_name ||
+			in_array( $block_name, $this->get_excluded_blocks(), true ) ||
+			$this->is_dynamic_block( $block_name ) ||
+			! class_exists( '\WP_HTML_Tag_Processor' )
+		) {
+			return $block_content;
+		}
+
+		$processor = new \WP_HTML_Tag_Processor( $block_content );
+		if ( ! $processor->next_tag() ) {
+			return $block_content;
+		}
+
+		$processor->set_attribute( 'data-motion', 'true' );
+		$processor->set_attribute( 'data-motion-animation', $default_animation );
+
+		return $processor->get_updated_html();
+	}
+
+	/**
+	 * Returns whether a registered block is rendered dynamically.
+	 *
+	 * @param string $block_name Registered block name.
+	 * @return bool
+	 */
+	private function is_dynamic_block( string $block_name ): bool {
+		if ( ! class_exists( '\WP_Block_Type_Registry' ) ) {
+			return false;
+		}
+
+		$block_type = \WP_Block_Type_Registry::get_instance()->get_registered( $block_name );
+
+		return $block_type instanceof \WP_Block_Type && $block_type->is_dynamic();
 	}
 
 	/**

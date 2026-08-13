@@ -24,7 +24,7 @@ final class Options {
 		$options = wp_parse_args( $options, self::defaults() );
 
 		/**
-		 * Filters animation defaults exposed by Motion for WP.
+		 * Filters animation defaults exposed by MotionForWP.
 		 *
 		 * @param array<string, mixed> $options Animation options.
 		 */
@@ -36,14 +36,20 @@ final class Options {
 	/**
 	 * Returns the stable option defaults.
 	 *
-	 * @return array<string, int|float|string>
+	 * @return array<string, bool|int|float|string>
 	 */
 	public static function defaults(): array {
 		return array(
-			'duration' => 0.5,
-			'delay'    => 0,
-			'easing'   => 'ease-in-out',
-			'margin'   => 100,
+			'enabled'           => true,
+			'reduced_motion'    => true,
+			'preview_enabled'   => true,
+			'repeat'            => 'once',
+			'default_animation' => 'none',
+			'duration'          => 0.5,
+			'delay'             => 0,
+			'easing'            => 'ease-in-out',
+			'margin'            => 100,
+			'threshold'         => 0,
 		);
 	}
 }

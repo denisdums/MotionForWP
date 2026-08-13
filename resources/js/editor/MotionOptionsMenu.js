@@ -11,6 +11,7 @@ export function MotionOptionsMenu( {
 	toggleSetting,
 	reducedMotion,
 	hasOverrides,
+	previewEnabled,
 	onReplay,
 	onReset,
 } ) {
@@ -40,16 +41,18 @@ export function MotionOptionsMenu( {
 						} ) }
 					</MenuGroup>
 					<MenuGroup>
-						<MenuItem
-							aria-disabled={ reducedMotion }
-							onClick={ () => {
-								if ( ! reducedMotion ) {
-									onReplay();
-								}
-							} }
-						>
-							{ __( 'Replay animation', 'motion-for-wp' ) }
-						</MenuItem>
+						{ previewEnabled && (
+							<MenuItem
+								aria-disabled={ reducedMotion }
+								onClick={ () => {
+									if ( ! reducedMotion ) {
+										onReplay();
+									}
+								} }
+							>
+								{ __( 'Replay animation', 'motion-for-wp' ) }
+							</MenuItem>
+						) }
 						<MenuItem
 							aria-disabled={ ! hasOverrides }
 							onClick={ () => {

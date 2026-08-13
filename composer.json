@@ -1,6 +1,6 @@
 {
 	"name": "denisdums/motion-for-wp",
-	"description": "Development tooling for Motion for WP.",
+	"description": "Development tooling for MotionForWP.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"require": {

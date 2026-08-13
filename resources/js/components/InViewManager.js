@@ -38,11 +38,21 @@ export function InViewManager() {
 		handleInViewEvent( infos ) {
 			const motionTarget = new MotionTarget( infos );
 			motionTarget.animate();
+
+			if ( runtime.options.repeat === 'always' ) {
+				return () => motionTarget.stop();
+			}
 		},
 
 		getInViewOptions( element ) {
 			return {
 				margin: this.getMargin( element ),
+				amount: clampNumber(
+					Number( runtime.options.threshold ?? 0 ) / 100,
+					0,
+					1,
+					0
+				),
 			};
 		},
 
@@ -76,13 +86,21 @@ export class MotionTarget {
 		if ( ! this.element || ! this.animation ) {
 			return;
 		}
-		animate( this.element, this.animation, this.animationOptions );
+		this.controls = animate(
+			this.element,
+			this.animation,
+			this.animationOptions
+		);
+	}
+
+	stop() {
+		this.controls?.cancel();
 	}
 
 	getAnimation() {
-		const animationSlug = this.element.getAttribute(
-			'data-motion-animation'
-		);
+		const animationSlug =
+			this.element.getAttribute( 'data-motion-animation' ) ||
+			runtime.options.default_animation;
 		if ( ! runtime.animations[ animationSlug ] ) {
 			return null;
 		}

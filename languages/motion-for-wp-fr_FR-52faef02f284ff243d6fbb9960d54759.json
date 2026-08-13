@@ -29,6 +29,9 @@
       "Choose how this block appears in the viewport.": [
         "Choisissez la fa\u00e7on dont ce bloc appara\u00eet dans la zone d\u2019affichage."
       ],
+      "Animations are globally disabled in Motion settings. Block configuration is preserved.": [
+        "Les animations sont d\u00e9sactiv\u00e9es globalement dans les r\u00e9glages de Motion. La configuration des blocs est conserv\u00e9e."
+      ],
       "Animation previews are disabled because reduced motion is enabled in your system settings.": [
         "Les aper\u00e7us sont d\u00e9sactiv\u00e9s, car la r\u00e9duction des animations est activ\u00e9e dans les r\u00e9glages de votre syst\u00e8me."
       ],

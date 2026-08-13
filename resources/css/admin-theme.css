@@ -1,5 +1,5 @@
 /**
- * Motion for WP admin theme.
+ * MotionForWP admin theme.
  */
 
 .plugin-admin--motion-for-wp {
@@ -11,6 +11,7 @@
 
 .plugin-admin--motion-for-wp .plugin-admin__hero {
 	background: linear-gradient(135deg, #1554c5 0%, #246df6 68%, #ffeb00 180%);
+	max-width: 920px;
 }
 
 .plugin-admin--motion-for-wp .plugin-admin__hero::after {
@@ -23,4 +24,8 @@
 	right: -40px;
 	top: -90px;
 	width: 180px;
+}
+
+.plugin-admin--motion-for-wp .plugin-admin__settings-grid .postbox {
+	border-top: 3px solid var(--plugin-admin-primary);
 }

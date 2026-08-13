@@ -50,7 +50,7 @@ const addAttributes = ( settings, name ) => {
 		...settings,
 		attributes: {
 			...settings.attributes,
-			motion: { type: 'string', default: 'none' },
+			motion: { type: 'string', default: 'global' },
 			duration: { type: 'string', default: '0' },
 			delay: { type: 'string', default: '0' },
 			easing: { type: 'string', default: 'none' },
@@ -82,14 +82,19 @@ const addAdvancedControls = createHigherOrderComponent(
 const addExtraProps = ( props, blockType, attributes ) => {
 	if (
 		! supportedBlocks.has( blockType.name ) ||
-		attributes.motion === 'none'
+		attributes.motion === 'none' ||
+		( attributes.motion === 'global' &&
+			runtime.options?.default_animation === 'none' )
 	) {
 		return props;
 	}
 
 	const extraProps = {
 		'data-motion': true,
-		'data-motion-animation': attributes.motion,
+		'data-motion-animation':
+			attributes.motion === 'global'
+				? runtime.options?.default_animation
+				: attributes.motion,
 	};
 
 	if ( attributes.easing && attributes.easing !== 'none' ) {

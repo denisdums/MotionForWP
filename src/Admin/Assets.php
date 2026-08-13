@@ -21,7 +21,7 @@ final class Assets implements Service {
 	}
 
 	/**
-	 * Loads branded styles only on the Motion for WP settings page.
+	 * Loads branded styles only on the MotionForWP settings page.
 	 *
 	 * @param string $hook_suffix Current admin screen suffix.
 	 */

@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useState } from '@wordpress/element';
 import { animate } from 'motion';
 
-import { resolveMotionEasing, resolveMotionNumber, runtime } from './runtime';
+import {
+	resolveMotionEasing,
+	resolveMotionNumber,
+	respectsReducedMotion,
+	runtime,
+} from './runtime';
 
 const activePreviews = new Map();
 
@@ -38,11 +43,15 @@ export const stopMotionPreview = ( clientId ) => {
 	}
 };
 
-export function useMotionPreview( clientId, attributes ) {
+export function useMotionPreview(
+	clientId,
+	attributes,
+	previewEnabled = true
+) {
 	const [ previewError, setPreviewError ] = useState( false );
-	const reducedMotion = window.matchMedia(
-		'(prefers-reduced-motion: reduce)'
-	).matches;
+	const reducedMotion =
+		respectsReducedMotion &&
+		window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 
 	useEffect(
 		() => () => {
@@ -52,8 +61,18 @@ export function useMotionPreview( clientId, attributes ) {
 	);
 
 	const replay = useCallback( () => {
+		if ( ! previewEnabled ) {
+			stopMotionPreview( clientId );
+			setPreviewError( false );
+			return;
+		}
+
 		const element = findBlockElement( clientId );
-		const animation = runtime.animations?.[ attributes.motion ];
+		const animationSlug =
+			attributes.motion === 'global'
+				? runtime.options?.default_animation
+				: attributes.motion;
+		const animation = runtime.animations?.[ animationSlug ];
 
 		setPreviewError( false );
 		if ( reducedMotion || ! element || ! animation?.properties ) {
@@ -89,7 +108,7 @@ export function useMotionPreview( clientId, attributes ) {
 				}
 			} )
 			.catch( () => {} );
-	}, [ attributes, clientId, reducedMotion ] );
+	}, [ attributes, clientId, previewEnabled, reducedMotion ] );
 
 	return { previewError, reducedMotion, replay, setPreviewError };
 }

@@ -6,7 +6,12 @@ import { __ } from '@wordpress/i18n';
 import { MotionAnimationPreview } from './MotionAnimationPreview';
 import { MotionOptionsMenu } from './MotionOptionsMenu';
 import { MotionSettingControl } from './MotionSettingControl';
-import { animationOptions } from './runtime';
+import {
+	animationOptions,
+	motionEnabled,
+	previewsEnabled,
+	runtime,
+} from './runtime';
 import { stopMotionPreview, useMotionPreview } from './use-motion-preview';
 
 void createElement;
@@ -18,14 +23,20 @@ export function MotionInspectorControls( {
 } ) {
 	const [ visibleSettings, setVisibleSettings ] = useState( {} );
 	const { motion, duration, delay, easing, margin } = attributes;
-	const hasAnimation = motion !== 'none';
+	const resolvedMotion =
+		motion === 'global' ? runtime.options?.default_animation : motion;
+	const hasAnimation = resolvedMotion !== 'none';
 	const hasOverrides =
 		duration !== '0' ||
 		delay !== '0' ||
 		easing !== 'none' ||
 		margin !== '0';
 	const { previewError, reducedMotion, replay, setPreviewError } =
-		useMotionPreview( clientId, attributes );
+		useMotionPreview(
+			clientId,
+			attributes,
+			previewsEnabled && motionEnabled
+		);
 	const settings = [
 		{
 			key: 'duration',
@@ -103,6 +114,7 @@ export function MotionInspectorControls( {
 							toggleSetting={ toggleSetting }
 							reducedMotion={ reducedMotion }
 							hasOverrides={ hasOverrides }
+							previewEnabled={ previewsEnabled && motionEnabled }
 							onReplay={ replay }
 							onReset={ resetOverrides }
 						/>
@@ -124,6 +136,14 @@ export function MotionInspectorControls( {
 							: setAttributes( { motion: value } )
 					}
 				/>
+				{ ! motionEnabled && (
+					<Notice status="info" isDismissible={ false }>
+						{ __(
+							'Animations are globally disabled in Motion settings. Block configuration is preserved.',
+							'motion-for-wp'
+						) }
+					</Notice>
+				) }
 				{ hasAnimation && (
 					<Fragment>
 						{ settings.map( ( setting ) =>
@@ -142,31 +162,37 @@ export function MotionInspectorControls( {
 						) }
 					</Fragment>
 				) }
-				{ hasAnimation && (
+				{ hasAnimation && previewsEnabled && motionEnabled && (
 					<MotionAnimationPreview
-						animationSlug={ motion }
+						animationSlug={ resolvedMotion }
 						duration={ duration }
 						delay={ delay }
 						easing={ easing }
 						reducedMotion={ reducedMotion }
 					/>
 				) }
-				{ reducedMotion && hasAnimation && (
-					<Notice status="info" isDismissible={ false }>
-						{ __(
-							'Animation previews are disabled because reduced motion is enabled in your system settings.',
-							'motion-for-wp'
-						) }
-					</Notice>
-				) }
-				{ previewError && hasAnimation && (
-					<Notice status="warning" isDismissible={ false }>
-						{ __(
-							'The animation preview is unavailable for this block.',
-							'motion-for-wp'
-						) }
-					</Notice>
-				) }
+				{ reducedMotion &&
+					hasAnimation &&
+					previewsEnabled &&
+					motionEnabled && (
+						<Notice status="info" isDismissible={ false }>
+							{ __(
+								'Animation previews are disabled because reduced motion is enabled in your system settings.',
+								'motion-for-wp'
+							) }
+						</Notice>
+					) }
+				{ previewError &&
+					hasAnimation &&
+					previewsEnabled &&
+					motionEnabled && (
+						<Notice status="warning" isDismissible={ false }>
+							{ __(
+								'The animation preview is unavailable for this block.',
+								'motion-for-wp'
+							) }
+						</Notice>
+					) }
 			</div>
 		</InspectorControls>
 	);

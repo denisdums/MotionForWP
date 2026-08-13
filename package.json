@@ -1,6 +1,6 @@
 {
 	"name": "motion-for-wp",
-	"version": "0.10.0",
+	"version": "0.11.0",
 	"description": "Animation controls and blocks for the WordPress block editor.",
 	"author": "Denis Dumont",
 	"license": "GPL-2.0-or-later",

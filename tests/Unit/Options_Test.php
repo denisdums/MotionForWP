@@ -18,10 +18,16 @@ final class Options_Test extends TestCase {
 	public function test_defaults_are_stable(): void {
 		$this->assertSame(
 			array(
-				'duration' => 0.5,
-				'delay'    => 0,
-				'easing'   => 'ease-in-out',
-				'margin'   => 100,
+				'enabled'           => true,
+				'reduced_motion'    => true,
+				'preview_enabled'   => true,
+				'repeat'            => 'once',
+				'default_animation' => 'none',
+				'duration'          => 0.5,
+				'delay'             => 0,
+				'easing'            => 'ease-in-out',
+				'margin'            => 100,
+				'threshold'         => 0,
 			),
 			Options::defaults()
 		);

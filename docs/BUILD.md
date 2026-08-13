@@ -1,6 +1,6 @@
 # Compilation des assets
 
-Motion for WP utilise uniquement `@wordpress/scripts`. Laravel Mix et `npm-run-all` ne font plus partie de la chaîne de compilation.
+MotionForWP utilise uniquement `@wordpress/scripts`. Laravel Mix et `npm-run-all` ne font plus partie de la chaîne de compilation.
 
 Le projet cible Node.js 24 LTS via `.nvmrc`, avec Node.js 20 ou supérieur et npm 10 ou supérieur comme contraintes déclarées. Utiliser une version LTS de Node, conformément à la recommandation du Block Editor Handbook.
 

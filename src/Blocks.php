@@ -45,7 +45,7 @@ final class Blocks implements Service {
 	public function register_block_category( array $categories ): array {
 		$categories[] = array(
 			'slug'  => 'motion-for-wp',
-			'title' => __( 'Motion For WP', 'motion-for-wp' ),
+			'title' => __( 'MotionForWP', 'motion-for-wp' ),
 			'icon'  => 'wordpress',
 		);
 

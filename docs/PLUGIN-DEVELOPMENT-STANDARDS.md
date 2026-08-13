@@ -1,6 +1,6 @@
 # Standard de développement des plugins WordPress
 
-Ce document est la référence pour Motion for WP et les autres plugins du même auteur. Il est écrit pour être suivi autant par des développeurs que par des agents IA.
+Ce document est la référence pour MotionForWP et les autres plugins du même auteur. Il est écrit pour être suivi autant par des développeurs que par des agents IA.
 
 ## 1. Principes directeurs
 

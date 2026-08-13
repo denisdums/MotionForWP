@@ -2,7 +2,7 @@
 
 ## Règle d'éligibilité
 
-Motion for WP ajoute ses attributs et ses contrôles uniquement lorsqu'un bloc :
+MotionForWP ajoute ses attributs et ses contrôles uniquement lorsqu'un bloc :
 
 1. possède un nom enregistré ;
 2. expose une fonction `save`, donc un élément racine sérialisé pouvant recevoir les attributs `data-motion-*` ;

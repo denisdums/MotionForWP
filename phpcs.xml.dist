@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<ruleset name="Motion for WP">
-	<description>WordPress Coding Standards for Motion for WP.</description>
+<ruleset name="MotionForWP">
+	<description>WordPress Coding Standards for MotionForWP.</description>
 
-	<file>motion-for-wp.php</file>
+	<file>motion-for-gutenberg.php</file>
 	<file>src</file>
 	<file>tests</file>
 

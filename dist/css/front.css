@@ -1,1 +1,1 @@
-html.motion-for-wp-ready [data-motion]{opacity:0}@media(prefers-reduced-motion:reduce){html.motion-for-wp-ready [data-motion]{opacity:1}}
+html.motion-for-wp-ready [data-motion]{opacity:0}@media(prefers-reduced-motion:reduce){html.motion-for-wp-ready:not(.motion-for-wp-allow-reduced-motion) [data-motion]{opacity:1}}

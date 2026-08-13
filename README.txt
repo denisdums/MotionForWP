@@ -1,9 +1,9 @@
-=== Motion for WP ===
+=== MotionForWP ===
 Contributors: denisdums
 Tags: motion, gutenberg, motion for wp, animations, blocks
 Requires at least: 6.3
 Tested up to: 7.0
-Stable tag: 0.10.0
+Stable tag: 0.11.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,11 +12,13 @@ Add entrance animations to supported blocks directly from the Gutenberg inspecto
 
 == Description ==
 
-Motion for WP adds entrance animations to compatible static Gutenberg blocks. Choose an animation from the block
+MotionForWP adds entrance animations to compatible static Gutenberg blocks. Choose an animation from the block
 inspector, optionally override its duration, delay, easing or viewport margin, and preview the result before saving.
 
 The controls follow the native WordPress interface. Each optional property inherits the global plugin setting until
-you explicitly enable and change it. Animation previews respect the visitor's reduced-motion preference.
+you explicitly enable and change it. The Motion settings page can disable frontend animations without deleting block
+configuration, respect the visitor's reduced-motion preference, control replay behavior and visibility threshold,
+choose a default animation, and disable editor previews independently.
 
 == Usage ==
 
@@ -43,11 +45,12 @@ That's it!
 Use one of the channels below to contact support.
 [GitHub](https://github.com/denisdums/MotionForWP) - MotionForWP GitHub documentation and codebase.
 
-= Does Motion for WP respect reduced-motion preferences? =
-Yes. Frontend animations and editor previews are disabled when the operating system requests reduced motion.
+= Does MotionForWP respect reduced-motion preferences? =
+Yes. By default, frontend animations and editor previews are disabled when the operating system requests reduced
+motion. Administrators can change this behavior from the Motion settings page.
 
 = Why is the Motion section unavailable for some blocks? =
-Motion for WP currently targets static blocks with a serializable root element. Dynamic and incompatible blocks are
+MotionForWP currently targets static blocks with a serializable root element. Dynamic and incompatible blocks are
 excluded to avoid saving settings that cannot be rendered reliably.
 
 == Screenshots ==
@@ -59,6 +62,15 @@ plugins/motion-for-wp/.wordpress-org/screenshot-1.png
 plugins/motion-for-wp/.wordpress-org/screenshot-2.png
 
 == Changelog ==
+
+= 0.11.0 =
+
+- Added a global frontend animation switch that preserves all saved block settings.
+- Added configurable reduced-motion handling, replay behavior and visibility threshold.
+- Added a default animation with per-block global inheritance and explicit opt-out support.
+- Added a global switch for editor previews without affecting frontend animations.
+- Redesigned the Motion settings page with responsive native WordPress cards and plugin branding.
+- Improved notices, French translations, layout resilience and release packaging.
 
 = 0.10.0 =
 
