@@ -3,7 +3,7 @@ Contributors: denisdums
 Tags: motion, gutenberg, motion for wp, animations, blocks
 Requires at least: 6.3
 Tested up to: 7.0
-Stable tag: 0.12.0
+Stable tag: 1.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -63,6 +63,13 @@ plugins/motion-for-wp/.wordpress-org/screenshot-1.png
 plugins/motion-for-wp/.wordpress-org/screenshot-2.png
 
 == Changelog ==
+
+= 1.0.0 =
+
+- Promoted MotionForWP to its first stable release with no breaking changes from 0.12.0.
+- Provides block-level entrance animations with global inheritance and explicit per-block opt-out.
+- Includes editor previews, mobile behavior, concurrency limits, group staggering and reduced-motion support.
+- Ships a branded responsive settings experience, French translations and a validated distributable archive.
 
 = 0.12.0 =
 

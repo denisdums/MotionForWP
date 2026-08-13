@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MotionForWP 0.12.0\n"
+"Project-Id-Version: MotionForWP 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/MotionForWP\n"
 "POT-Creation-Date: 2026-08-13T15:57:20+02:00\n"
 "PO-Revision-Date: 2026-08-13T11:39:02+00:00\n"
