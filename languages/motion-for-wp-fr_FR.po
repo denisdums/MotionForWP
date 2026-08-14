@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MotionForWP 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/MotionForWP\n"
-"POT-Creation-Date: 2026-08-14T15:53:46+02:00\n"
+"POT-Creation-Date: 2026-08-14T16:05:30+02:00\n"
 "PO-Revision-Date: 2026-08-13T11:39:02+00:00\n"
 "Last-Translator: Denis Dumont\n"
 "Language-Team: French\n"
@@ -468,8 +468,7 @@ msgstr "Interaction"
 msgid ""
 "Add a pointer-driven reaction independently from the entrance animation."
 msgstr ""
-"Ajoutez une réaction au pointeur indépendamment de l’animation "
-"d’apparition."
+"Ajoutez une réaction au pointeur indépendamment de l’animation d’apparition."
 
 #: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:154
 msgid "No interaction"
@@ -498,6 +497,10 @@ msgstr "L’aperçu de l’animation n’est pas disponible pour ce bloc."
 #: dist/js/admin.js:4 resources/js/hooks/hooks.js:22
 msgid "Magnetic pull"
 msgstr "Attraction magnétique"
+
+#: dist/js/admin.js:4 resources/js/hooks/hooks.js:26
+msgid "Rolling button"
+msgstr "Bouton défilant"
 
 #: dist/blocks/MotionCounter/block.json
 #: resources/blocks/MotionCounter/block.json

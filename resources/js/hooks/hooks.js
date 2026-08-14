@@ -22,6 +22,10 @@ const getBlockInteractions = ( blockName ) => {
 						label: __( 'Magnetic pull', 'motion-for-wp' ),
 						value: 'magnetic-pull',
 					},
+					{
+						label: __( 'Rolling button', 'motion-for-wp' ),
+						value: 'rolling-button',
+					},
 			  ]
 			: [];
 

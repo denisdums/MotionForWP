@@ -54,7 +54,9 @@ Les noms et valeurs des attributs `motion`, `duration`, `delay`, `easing` et `ma
 
 ## Interactions par type de bloc
 
-Les interactions sont indépendantes des animations d'apparition. MotionForWP propose par défaut `magnetic-pull` pour `core/button`. Le bouton peut donc utiliser cet effet seul ou le cumuler avec une animation d'entrée.
+Les interactions sont indépendantes des animations d'apparition. MotionForWP propose par défaut `magnetic-pull` et `rolling-button` pour `core/button`. Le bouton peut donc utiliser une interaction seule ou la cumuler avec une animation d'entrée.
+
+`rolling-button` place deux copies visuelles du libellé dans une zone masquée et les décale d'une ligne au survol ou à la prise de focus clavier. La copie décorative est ignorée par les technologies d'assistance : le bouton conserve un seul nom accessible et ses dimensions ne changent pas. `magnetic-pull` reste réservé aux pointeurs précis. Toutes les interactions sont neutralisées lorsque la réduction des animations est active.
 
 Le filtre JavaScript suivant permet à une intégration d'exposer une interaction sur un autre bloc statique compatible :
 
@@ -74,4 +76,4 @@ addFilter(
 );
 ```
 
-L'attribut sérialisé `motionInteraction` vaut `none` par défaut. Une valeur inconnue n'est jamais rendue dans le HTML. L'effet magnétique est désactivé pour les pointeurs tactiles et lorsque la réduction des animations est active.
+L'attribut sérialisé `motionInteraction` vaut `none` par défaut. Une valeur inconnue n'est jamais rendue dans le HTML. L'effet magnétique est désactivé pour les pointeurs tactiles. Toutes les interactions respectent la préférence de réduction des animations.

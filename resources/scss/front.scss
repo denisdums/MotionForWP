@@ -2,6 +2,24 @@ html.motion-for-wp-ready [data-motion] {
 	opacity: 0;
 }
 
+.motion-for-wp-rolling-button__viewport {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: bottom;
+}
+
+.motion-for-wp-rolling-button__label {
+	display: block;
+}
+
+.motion-for-wp-rolling-button__label--duplicate {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
 	html.motion-for-wp-ready:not(.motion-for-wp-allow-reduced-motion) [data-motion] {

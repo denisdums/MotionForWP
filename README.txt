@@ -14,8 +14,9 @@ Add entrance animations to supported blocks directly from the Gutenberg inspecto
 
 MotionForWP adds entrance animations to compatible static Gutenberg blocks. Choose an animation from the block
 inspector, optionally override its duration, delay, easing or viewport margin, and preview the result before saving.
-Supported blocks can also expose independent pointer interactions. Core Button blocks include a Magnetic pull option
-that gently follows a fine pointer and springs back without replacing the selected entrance animation.
+Supported blocks can also expose independent interactions. Core Button blocks include Magnetic pull, which gently
+follows a fine pointer, and Rolling button, which rolls a clipped duplicate of the label on hover or keyboard focus.
+Neither interaction replaces the selected entrance animation or changes the button's accessible name.
 
 The controls follow the native WordPress interface. Each optional property inherits the global plugin setting until
 you explicitly enable and change it. The Motion settings page can disable frontend animations without deleting block
@@ -34,7 +35,8 @@ and progressively stagger animated sibling blocks.
 
 "Reset all" clears the optional overrides and restores the global values without removing the selected animation.
 Choosing "No animation" removes the animation and its overrides from the block.
-For a Button block, choose "Magnetic pull" under "Interaction" to enable the pointer reaction on the frontend.
+For a Button block, choose "Magnetic pull" or "Rolling button" under "Interaction". Rolling button works on hover and
+keyboard focus; Magnetic pull is available for precise pointing devices.
 
 == Installation ==
 

@@ -29,6 +29,7 @@
       "Interaction": ["Interaction"],
       "No interaction": ["Aucune interaction"],
       "Magnetic pull": ["Attraction magnétique"],
+      "Rolling button": ["Bouton défilant"],
       "Add a pointer-driven reaction independently from the entrance animation.": [
         "Ajoutez une réaction au pointeur indépendamment de l’animation d’apparition."
       ],
