@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MotionForWP 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/MotionForWP\n"
-"POT-Creation-Date: 2026-08-13T15:57:20+02:00\n"
+"POT-Creation-Date: 2026-08-14T15:53:46+02:00\n"
 "PO-Revision-Date: 2026-08-13T11:39:02+00:00\n"
 "Last-Translator: Denis Dumont\n"
 "Language-Team: French\n"
@@ -37,7 +37,7 @@ msgid "https://denisdums.com"
 msgstr "https://denisdums.com"
 
 #: src/Admin/Settings_Page.php:66 dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:109
+#: resources/js/editor/MotionInspectorControls.js:111
 msgid "Motion"
 msgstr "Motion"
 
@@ -78,19 +78,19 @@ msgid "Animation defaults"
 msgstr "Paramètres d’animation par défaut"
 
 #: src/Admin/Settings_Page.php:159 dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:44
+#: resources/js/editor/MotionInspectorControls.js:46
 #: resources/js/editor/MotionSettingControl.js:25
 msgid "Duration"
 msgstr "Durée"
 
 #: src/Admin/Settings_Page.php:165 dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:50
+#: resources/js/editor/MotionInspectorControls.js:52
 #: resources/js/editor/MotionSettingControl.js:31
 msgid "Delay"
 msgstr "Délai"
 
 #: src/Admin/Settings_Page.php:171 dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:62
+#: resources/js/editor/MotionInspectorControls.js:64
 #: resources/js/editor/MotionSettingControl.js:37
 msgid "Viewport margin"
 msgstr "Marge de la zone d’affichage"
@@ -100,7 +100,7 @@ msgid "Default animation"
 msgstr "Animation par défaut"
 
 #: src/Admin/Settings_Page.php:199 dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:56
+#: resources/js/editor/MotionInspectorControls.js:58
 #: resources/js/editor/MotionSettingControl.js:15
 msgid "Easing"
 msgstr "Courbe d’accélération"
@@ -130,7 +130,9 @@ msgstr "Priorité des valeurs :"
 
 #: src/Admin/Settings_Page.php:371
 msgid "Settings defined directly on a block override these global defaults."
-msgstr "Les réglages définis directement sur un bloc remplacent ces valeurs globales par défaut."
+msgstr ""
+"Les réglages définis directement sur un bloc remplacent ces valeurs globales "
+"par défaut."
 
 #: src/Admin/Settings_Page.php:378
 msgid ""
@@ -195,7 +197,8 @@ msgid ""
 "simultaneously. A concurrency limit can smooth complex pages."
 msgstr ""
 "Préférez des animations courtes et évitez d’animer simultanément de nombreux "
-"blocs volumineux. Une limite de concurrence peut fluidifier les pages complexes."
+"blocs volumineux. Une limite de concurrence peut fluidifier les pages "
+"complexes."
 
 #: src/Admin/Settings_Page.php:417
 msgid "MotionForWP resources"
@@ -251,7 +254,8 @@ msgid ""
 "action, or remain hidden. Frontend animations are unaffected."
 msgstr ""
 "Choisissez si les aperçus sont lus automatiquement, uniquement après une "
-"action de relance, ou restent masqués. Les animations du site ne sont pas affectées."
+"action de relance, ou restent masqués. Les animations du site ne sont pas "
+"affectées."
 
 #: src/Admin/Settings_Page.php:466
 msgid "Same as desktop"
@@ -275,7 +279,9 @@ msgstr ""
 
 #: src/Admin/Settings_Page.php:479
 msgid "Maximum animations started at the same time. Use 0 for no limit."
-msgstr "Nombre maximal d’animations lancées simultanément. Utilisez 0 pour ne pas appliquer de limite."
+msgstr ""
+"Nombre maximal d’animations lancées simultanément. Utilisez 0 pour ne pas "
+"appliquer de limite."
 
 #: src/Admin/Settings_Page.php:488
 msgid "Progressively delay animated sibling blocks"
@@ -446,15 +452,30 @@ msgstr "Rejouer l’animation"
 msgid "Reset all"
 msgstr "Tout réinitialiser"
 
-#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:127
+#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:129
 msgid "Animation"
 msgstr "Animation"
 
-#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:128
+#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:130
 msgid "Choose how this block appears in the viewport."
 msgstr "Choisissez la façon dont ce bloc apparaît dans la zone d’affichage."
 
-#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:142
+#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:146
+msgid "Interaction"
+msgstr "Interaction"
+
+#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:147
+msgid ""
+"Add a pointer-driven reaction independently from the entrance animation."
+msgstr ""
+"Ajoutez une réaction au pointeur indépendamment de l’animation "
+"d’apparition."
+
+#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:154
+msgid "No interaction"
+msgstr "Aucune interaction"
+
+#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:166
 msgid ""
 "Animations are globally disabled in Motion settings. Block configuration is "
 "preserved."
@@ -462,7 +483,7 @@ msgstr ""
 "Les animations sont désactivées globalement dans les réglages de Motion. La "
 "configuration des blocs est conservée."
 
-#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:181
+#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:205
 msgid ""
 "Animation previews are disabled because reduced motion is enabled in your "
 "system settings."
@@ -470,9 +491,13 @@ msgstr ""
 "Les aperçus sont désactivés, car la réduction des animations est activée "
 "dans les réglages de votre système."
 
-#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:192
+#: dist/js/admin.js:4 resources/js/editor/MotionInspectorControls.js:216
 msgid "The animation preview is unavailable for this block."
 msgstr "L’aperçu de l’animation n’est pas disponible pour ce bloc."
+
+#: dist/js/admin.js:4 resources/js/hooks/hooks.js:22
+msgid "Magnetic pull"
+msgstr "Attraction magnétique"
 
 #: dist/blocks/MotionCounter/block.json
 #: resources/blocks/MotionCounter/block.json

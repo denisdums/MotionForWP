@@ -1,4 +1,5 @@
 import { InViewManager } from './components/InViewManager';
+import { InteractionManager } from './components/InteractionManager';
 import '../scss/front.scss';
 
 const motionEnabled = window.motionForWP?.options?.enabled !== false;
@@ -18,4 +19,5 @@ if ( window.motionForWP?.options?.reduced_motion === false ) {
 if ( motionEnabled && ! shouldReduceMotion && ! mobileAnimationsDisabled ) {
 	document.documentElement.classList.add( 'motion-for-wp-ready' );
 	InViewManager().init();
+	InteractionManager().init();
 }

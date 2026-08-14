@@ -2,6 +2,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 // The classic JSX transform consumes createElement after linting.
 import { createElement, Fragment } from '@wordpress/element';
 import { addFilter, applyFilters } from '@wordpress/hooks';
+import { __ } from '@wordpress/i18n';
 
 import { MotionInspectorControls } from '../editor/MotionInspectorControls';
 import { runtime } from '../editor/runtime';
@@ -12,6 +13,39 @@ void createElement;
 const namespace = 'motion-for-wp';
 const excludedBlocks = new Set( runtime.excludedBlocks || [] );
 const supportedBlocks = new Set();
+
+const getBlockInteractions = ( blockName ) => {
+	const interactions =
+		blockName === 'core/button'
+			? [
+					{
+						label: __( 'Magnetic pull', 'motion-for-wp' ),
+						value: 'magnetic-pull',
+					},
+			  ]
+			: [];
+
+	/**
+	 * Filters the interactive effects available for a supported block type.
+	 *
+	 * @param {Array}  interactions Available interaction options.
+	 * @param {string} blockName    Registered block name.
+	 */
+	const filteredInteractions = applyFilters(
+		'motionForWP.blockInteractions',
+		interactions,
+		blockName
+	);
+
+	return Array.isArray( filteredInteractions )
+		? filteredInteractions.filter(
+				( interaction ) =>
+					typeof interaction?.label === 'string' &&
+					typeof interaction?.value === 'string' &&
+					interaction.value !== 'none'
+		  )
+		: interactions;
+};
 
 const canSupportMotion = ( settings, blockName ) => {
 	const hasSerializedRoot = typeof settings?.save === 'function';
@@ -45,6 +79,7 @@ const addAttributes = ( settings, name ) => {
 	}
 
 	supportedBlocks.add( name );
+	const interactions = getBlockInteractions( name );
 
 	return {
 		...settings,
@@ -55,6 +90,14 @@ const addAttributes = ( settings, name ) => {
 			delay: { type: 'string', default: '0' },
 			easing: { type: 'string', default: 'none' },
 			margin: { type: 'string', default: '0' },
+			...( interactions.length > 0
+				? {
+						motionInteraction: {
+							type: 'string',
+							default: 'none',
+						},
+				  }
+				: {} ),
 		},
 	};
 };
@@ -71,6 +114,7 @@ const addAdvancedControls = createHigherOrderComponent(
 				<MotionInspectorControls
 					attributes={ props.attributes }
 					clientId={ props.clientId }
+					interactionOptions={ getBlockInteractions( props.name ) }
 					setAttributes={ props.setAttributes }
 				/>
 			</Fragment>
@@ -80,33 +124,61 @@ const addAdvancedControls = createHigherOrderComponent(
 );
 
 const addExtraProps = ( props, blockType, attributes ) => {
-	if (
-		! supportedBlocks.has( blockType.name ) ||
-		attributes.motion === 'none' ||
-		( attributes.motion === 'global' &&
-			runtime.options?.default_animation === 'none' )
-	) {
+	if ( ! supportedBlocks.has( blockType.name ) ) {
 		return props;
 	}
 
-	const extraProps = {
-		'data-motion': true,
-		'data-motion-animation':
+	const extraProps = {};
+	const hasEntranceAnimation =
+		attributes.motion !== 'none' &&
+		! (
+			attributes.motion === 'global' &&
+			runtime.options?.default_animation === 'none'
+		);
+
+	if ( hasEntranceAnimation ) {
+		extraProps[ 'data-motion' ] = true;
+		extraProps[ 'data-motion-animation' ] =
 			attributes.motion === 'global'
 				? runtime.options?.default_animation
-				: attributes.motion,
-	};
+				: attributes.motion;
+	}
 
-	if ( attributes.easing && attributes.easing !== 'none' ) {
+	if (
+		getBlockInteractions( blockType.name ).some(
+			( interaction ) =>
+				interaction.value === attributes.motionInteraction
+		)
+	) {
+		extraProps[ 'data-motion-interaction' ] = attributes.motionInteraction;
+	}
+
+	if (
+		hasEntranceAnimation &&
+		attributes.easing &&
+		attributes.easing !== 'none'
+	) {
 		extraProps[ 'data-motion-easing' ] = attributes.easing;
 	}
-	if ( attributes.duration && attributes.duration !== '0' ) {
+	if (
+		hasEntranceAnimation &&
+		attributes.duration &&
+		attributes.duration !== '0'
+	) {
 		extraProps[ 'data-motion-duration' ] = attributes.duration;
 	}
-	if ( attributes.delay && attributes.delay !== '0' ) {
+	if (
+		hasEntranceAnimation &&
+		attributes.delay &&
+		attributes.delay !== '0'
+	) {
 		extraProps[ 'data-motion-delay' ] = attributes.delay;
 	}
-	if ( attributes.margin && attributes.margin !== '0' ) {
+	if (
+		hasEntranceAnimation &&
+		attributes.margin &&
+		attributes.margin !== '0'
+	) {
 		extraProps[ 'data-motion-margin' ] = attributes.margin;
 	}
 

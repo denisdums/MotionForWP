@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-13T16:06:45+02:00\n"
+"POT-Creation-Date: 2026-08-14T15:53:46+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: motion-for-wp\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: src/Admin/Settings_Page.php:66
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:109
+#: resources/js/editor/MotionInspectorControls.js:111
 msgid "Motion"
 msgstr ""
 
@@ -82,21 +82,21 @@ msgstr ""
 
 #: src/Admin/Settings_Page.php:159
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:44
+#: resources/js/editor/MotionInspectorControls.js:46
 #: resources/js/editor/MotionSettingControl.js:25
 msgid "Duration"
 msgstr ""
 
 #: src/Admin/Settings_Page.php:165
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:50
+#: resources/js/editor/MotionInspectorControls.js:52
 #: resources/js/editor/MotionSettingControl.js:31
 msgid "Delay"
 msgstr ""
 
 #: src/Admin/Settings_Page.php:171
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:62
+#: resources/js/editor/MotionInspectorControls.js:64
 #: resources/js/editor/MotionSettingControl.js:37
 msgid "Viewport margin"
 msgstr ""
@@ -107,7 +107,7 @@ msgstr ""
 
 #: src/Admin/Settings_Page.php:199
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:56
+#: resources/js/editor/MotionInspectorControls.js:58
 #: resources/js/editor/MotionSettingControl.js:15
 msgid "Easing"
 msgstr ""
@@ -428,28 +428,48 @@ msgid "Reset all"
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:127
+#: resources/js/editor/MotionInspectorControls.js:129
 msgid "Animation"
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:128
+#: resources/js/editor/MotionInspectorControls.js:130
 msgid "Choose how this block appears in the viewport."
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:142
+#: resources/js/editor/MotionInspectorControls.js:146
+msgid "Interaction"
+msgstr ""
+
+#: dist/js/admin.js:4
+#: resources/js/editor/MotionInspectorControls.js:147
+msgid "Add a pointer-driven reaction independently from the entrance animation."
+msgstr ""
+
+#: dist/js/admin.js:4
+#: resources/js/editor/MotionInspectorControls.js:154
+msgid "No interaction"
+msgstr ""
+
+#: dist/js/admin.js:4
+#: resources/js/editor/MotionInspectorControls.js:166
 msgid "Animations are globally disabled in Motion settings. Block configuration is preserved."
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:181
+#: resources/js/editor/MotionInspectorControls.js:205
 msgid "Animation previews are disabled because reduced motion is enabled in your system settings."
 msgstr ""
 
 #: dist/js/admin.js:4
-#: resources/js/editor/MotionInspectorControls.js:192
+#: resources/js/editor/MotionInspectorControls.js:216
 msgid "The animation preview is unavailable for this block."
+msgstr ""
+
+#: dist/js/admin.js:4
+#: resources/js/hooks/hooks.js:22
+msgid "Magnetic pull"
 msgstr ""
 
 #: dist/blocks/MotionCounter/block.json

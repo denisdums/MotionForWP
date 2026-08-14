@@ -26,6 +26,12 @@
       "Replay animation": ["Rejouer l\u2019animation"],
       "Reset all": ["Tout r\u00e9initialiser"],
       "Animation": ["Animation"],
+      "Interaction": ["Interaction"],
+      "No interaction": ["Aucune interaction"],
+      "Magnetic pull": ["Attraction magnétique"],
+      "Add a pointer-driven reaction independently from the entrance animation.": [
+        "Ajoutez une réaction au pointeur indépendamment de l’animation d’apparition."
+      ],
       "Choose how this block appears in the viewport.": [
         "Choisissez la fa\u00e7on dont ce bloc appara\u00eet dans la zone d\u2019affichage."
       ],

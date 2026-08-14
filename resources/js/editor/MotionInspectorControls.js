@@ -20,10 +20,12 @@ void createElement;
 export function MotionInspectorControls( {
 	attributes,
 	clientId,
+	interactionOptions = [],
 	setAttributes,
 } ) {
 	const [ visibleSettings, setVisibleSettings ] = useState( {} );
-	const { motion, duration, delay, easing, margin } = attributes;
+	const { motion, duration, delay, easing, margin, motionInteraction } =
+		attributes;
 	const resolvedMotion =
 		motion === 'global' ? runtime.options?.default_animation : motion;
 	const hasAnimation = resolvedMotion !== 'none';
@@ -137,6 +139,28 @@ export function MotionInspectorControls( {
 							: setAttributes( { motion: value } )
 					}
 				/>
+				{ interactionOptions.length > 0 && (
+					<SelectControl
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
+						label={ __( 'Interaction', 'motion-for-wp' ) }
+						help={ __(
+							'Add a pointer-driven reaction independently from the entrance animation.',
+							'motion-for-wp'
+						) }
+						value={ motionInteraction || 'none' }
+						options={ [
+							{
+								label: __( 'No interaction', 'motion-for-wp' ),
+								value: 'none',
+							},
+							...interactionOptions,
+						] }
+						onChange={ ( value ) =>
+							setAttributes( { motionInteraction: value } )
+						}
+					/>
+				) }
 				{ ! motionEnabled && (
 					<Notice status="info" isDismissible={ false }>
 						{ __(
