@@ -17,6 +17,7 @@ inspector, optionally override its duration, delay, easing or viewport margin, a
 Supported blocks can also expose independent interactions. Core Button blocks include Magnetic pull, which gently
 follows a fine pointer, and Rolling button, which rolls a clipped duplicate of the label on hover or keyboard focus.
 Neither interaction replaces the selected entrance animation or changes the button's accessible name.
+Group blocks include a Tilt card interaction that follows a precise pointer with a subtle three-dimensional tilt.
 
 The controls follow the native WordPress interface. Each optional property inherits the global plugin setting until
 you explicitly enable and change it. The Motion settings page can disable frontend animations without deleting block
@@ -37,6 +38,7 @@ and progressively stagger animated sibling blocks.
 Choosing "No animation" removes the animation and its overrides from the block.
 For a Button block, choose "Magnetic pull" or "Rolling button" under "Interaction". Rolling button works on hover and
 keyboard focus; Magnetic pull is available for precise pointing devices.
+For a Group block, choose "Tilt card" to make the group react smoothly to pointer position and return to rest when the pointer leaves.
 
 == Installation ==
 

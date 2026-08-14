@@ -1,7 +1,8 @@
 import { animate } from 'motion';
 
-const MAGNETIC_PULL_STRENGTH = 0.35;
-const MAGNETIC_MAX_PULL = 26;
+const MAGNETIC_PULL_STRENGTH = 0.55;
+const MAGNETIC_MAX_PULL = 34;
+const TILT_CARD_MAX_ANGLE = 2;
 
 export function InteractionManager() {
 	return {
@@ -24,7 +25,130 @@ export function InteractionManager() {
 					if ( interaction === 'rolling-button' ) {
 						this.initRollingButton( field, hasFinePointer );
 					}
+					if ( interaction === 'tilt-card' && hasFinePointer ) {
+						this.initTiltCard( field );
+					}
 				} );
+		},
+
+		initTiltCard( target ) {
+			if ( target.dataset.motionTiltCard === 'true' ) {
+				return;
+			}
+
+			const originalTransform = target.style.transform;
+			const originalWillChange = target.style.willChange;
+			let rect = null;
+			let isActive = false;
+			let frame = null;
+			let targetDegree = 0;
+			let targetRotateX = 0;
+			let targetRotateY = 0;
+			let currentDegree = 0;
+			let currentRotateX = 0;
+			let currentRotateY = 0;
+
+			target.dataset.motionTiltCard = 'true';
+			target.style.willChange = 'transform';
+
+			const render = () => {
+				frame = null;
+				const smoothing = 0.18;
+				currentDegree += ( targetDegree - currentDegree ) * smoothing;
+				currentRotateX +=
+					( targetRotateX - currentRotateX ) * smoothing;
+				currentRotateY +=
+					( targetRotateY - currentRotateY ) * smoothing;
+
+				const isAtRest =
+					Math.abs( currentDegree ) < 0.01 &&
+					Math.abs( currentRotateX ) < 0.01 &&
+					Math.abs( currentRotateY ) < 0.01 &&
+					targetDegree === 0 &&
+					targetRotateX === 0 &&
+					targetRotateY === 0;
+
+				if ( isAtRest ) {
+					currentDegree = 0;
+					currentRotateX = 0;
+					currentRotateY = 0;
+					target.style.transform = originalTransform;
+					return;
+				}
+
+				target.style.transform = `perspective(200px) rotate3d(${ -currentRotateX }, ${ currentRotateY }, 0, ${ currentDegree }deg)`;
+				frame = window.requestAnimationFrame( render );
+			};
+
+			const requestRender = () => {
+				if ( frame === null ) {
+					frame = window.requestAnimationFrame( render );
+				}
+			};
+
+			const leave = () => {
+				if ( ! isActive ) {
+					return;
+				}
+				isActive = false;
+				rect = null;
+				targetDegree = 0;
+				targetRotateX = 0;
+				targetRotateY = 0;
+				requestRender();
+			};
+			const enter = () => {
+				rect = target.getBoundingClientRect();
+				isActive = true;
+			};
+			const move = ( event ) => {
+				if ( ! isActive || event.pointerType === 'touch' ) {
+					return;
+				}
+
+				if (
+					event.clientX < rect.left ||
+					event.clientX > rect.right ||
+					event.clientY < rect.top ||
+					event.clientY > rect.bottom
+				) {
+					leave();
+					return;
+				}
+
+				const x = clamp(
+					event.clientX - ( rect.left + rect.width / 2 ),
+					-rect.width / 2,
+					rect.width / 2
+				);
+				const y = clamp(
+					event.clientY - ( rect.top + rect.height / 2 ),
+					-rect.height / 2,
+					rect.height / 2
+				);
+				const maxDistance = Math.max( rect.width / 2, rect.height / 2 );
+				const distance = Math.min(
+					Math.sqrt( x * x + y * y ),
+					maxDistance
+				);
+				targetDegree = ( distance / maxDistance ) * TILT_CARD_MAX_ANGLE;
+				targetRotateX = y / ( rect.width / 2 );
+				targetRotateY = x / ( rect.height / 2 );
+				requestRender();
+			};
+
+			target.addEventListener( 'pointerenter', enter );
+			document.addEventListener( 'pointermove', move );
+			this.cleanups.push( () => {
+				target.removeEventListener( 'pointerenter', enter );
+				document.removeEventListener( 'pointermove', move );
+				if ( frame !== null ) {
+					window.cancelAnimationFrame( frame );
+				}
+				target.style.transform = originalTransform;
+				target.style.willChange = originalWillChange;
+				delete target.dataset.motionTiltCard;
+			} );
 		},
 
 		initRollingButton( field, hasFinePointer ) {
@@ -98,71 +222,103 @@ export function InteractionManager() {
 			const target =
 				field.querySelector( '.wp-block-button__link' ) || field;
 			let frame = null;
+			let rect = null;
+			let isActive = false;
 			let currentX = 0;
 			let currentY = 0;
-			let pointerX = 0;
-			let pointerY = 0;
-			let controls = null;
+			let targetX = 0;
+			let targetY = 0;
+			const originalTranslate = target.style.translate;
+			const originalWillChange = target.style.willChange;
+
+			target.style.willChange = 'translate';
+
+			const render = () => {
+				frame = null;
+				const smoothing = 0.2;
+				currentX += ( targetX - currentX ) * smoothing;
+				currentY += ( targetY - currentY ) * smoothing;
+
+				const isAtRest =
+					Math.abs( currentX ) < 0.01 &&
+					Math.abs( currentY ) < 0.01 &&
+					targetX === 0 &&
+					targetY === 0;
+
+				if ( isAtRest ) {
+					currentX = 0;
+					currentY = 0;
+					target.style.translate = originalTranslate;
+					return;
+				}
+
+				target.style.translate = `${ currentX }px ${ currentY }px`;
+				frame = window.requestAnimationFrame( render );
+			};
+
+			const requestRender = () => {
+				if ( frame === null ) {
+					frame = window.requestAnimationFrame( render );
+				}
+			};
+
+			const updateTarget = ( event ) => {
+				if (
+					event.clientX < rect.left ||
+					event.clientX > rect.right ||
+					event.clientY < rect.top ||
+					event.clientY > rect.bottom
+				) {
+					reset();
+					return;
+				}
+
+				const centerX = rect.left + rect.width / 2;
+				const centerY = rect.top + rect.height / 2;
+				targetX = clamp(
+					( event.clientX - centerX ) * MAGNETIC_PULL_STRENGTH,
+					-MAGNETIC_MAX_PULL,
+					MAGNETIC_MAX_PULL
+				);
+				targetY = clamp(
+					( event.clientY - centerY ) * MAGNETIC_PULL_STRENGTH,
+					-MAGNETIC_MAX_PULL,
+					MAGNETIC_MAX_PULL
+				);
+				requestRender();
+			};
 
 			const move = ( event ) => {
-				if ( event.pointerType === 'touch' ) {
-					return;
-				}
-				pointerX = event.clientX;
-				pointerY = event.clientY;
-
-				if ( frame !== null ) {
+				if ( ! isActive || event.pointerType === 'touch' ) {
 					return;
 				}
 
-				frame = window.requestAnimationFrame( () => {
-					frame = null;
-					const rect = target.getBoundingClientRect();
-					const centerX = rect.left + rect.width / 2 - currentX;
-					const centerY = rect.top + rect.height / 2 - currentY;
-					currentX = clamp(
-						( pointerX - centerX ) * MAGNETIC_PULL_STRENGTH,
-						-MAGNETIC_MAX_PULL,
-						MAGNETIC_MAX_PULL
-					);
-					currentY = clamp(
-						( pointerY - centerY ) * MAGNETIC_PULL_STRENGTH,
-						-MAGNETIC_MAX_PULL,
-						MAGNETIC_MAX_PULL
-					);
-					controls?.cancel();
-					controls = animate(
-						target,
-						{ x: currentX, y: currentY },
-						{ duration: 0.16, easing: 'ease-out' }
-					);
-				} );
+				updateTarget( event );
 			};
 
 			const reset = () => {
-				if ( frame !== null ) {
-					window.cancelAnimationFrame( frame );
-					frame = null;
-				}
-				currentX = 0;
-				currentY = 0;
-				controls?.cancel();
-				controls = animate(
-					target,
-					{ x: 0, y: 0 },
-					{ type: 'spring', stiffness: 320, damping: 24 }
-				);
+				isActive = false;
+				rect = null;
+				targetX = 0;
+				targetY = 0;
+				requestRender();
+			};
+			const enter = ( event ) => {
+				rect = target.getBoundingClientRect();
+				isActive = true;
+				updateTarget( event );
 			};
 
-			target.addEventListener( 'pointermove', move );
-			target.addEventListener( 'pointerleave', reset );
+			target.addEventListener( 'pointerenter', enter );
+			document.addEventListener( 'pointermove', move );
 			this.cleanups.push( () => {
-				target.removeEventListener( 'pointermove', move );
-				target.removeEventListener( 'pointerleave', reset );
+				target.removeEventListener( 'pointerenter', enter );
+				document.removeEventListener( 'pointermove', move );
 				if ( frame !== null ) {
 					window.cancelAnimationFrame( frame );
 				}
-				controls?.cancel();
+				target.style.translate = originalTranslate;
+				target.style.willChange = originalWillChange;
 			} );
 		},
 

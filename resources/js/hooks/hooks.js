@@ -15,19 +15,29 @@ const excludedBlocks = new Set( runtime.excludedBlocks || [] );
 const supportedBlocks = new Set();
 
 const getBlockInteractions = ( blockName ) => {
-	const interactions =
-		blockName === 'core/button'
-			? [
-					{
-						label: __( 'Magnetic pull', 'motion-for-wp' ),
-						value: 'magnetic-pull',
-					},
-					{
-						label: __( 'Rolling button', 'motion-for-wp' ),
-						value: 'rolling-button',
-					},
-			  ]
-			: [];
+	let interactions = [];
+
+	if ( blockName === 'core/button' ) {
+		interactions = [
+			{
+				label: __( 'Magnetic pull', 'motion-for-wp' ),
+				value: 'magnetic-pull',
+			},
+			{
+				label: __( 'Rolling button', 'motion-for-wp' ),
+				value: 'rolling-button',
+			},
+		];
+	}
+
+	if ( blockName === 'core/group' ) {
+		interactions = [
+			{
+				label: __( 'Tilt card', 'motion-for-wp' ),
+				value: 'tilt-card',
+			},
+		];
+	}
 
 	/**
 	 * Filters the interactive effects available for a supported block type.

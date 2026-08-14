@@ -58,6 +58,8 @@ Les interactions sont indépendantes des animations d'apparition. MotionForWP pr
 
 `rolling-button` place deux copies visuelles du libellé dans une zone masquée et les décale d'une ligne au survol ou à la prise de focus clavier. La copie décorative est ignorée par les technologies d'assistance : le bouton conserve un seul nom accessible et ses dimensions ne changent pas. `magnetic-pull` reste réservé aux pointeurs précis. Toutes les interactions sont neutralisées lorsque la réduction des animations est active.
 
+Les blocs `core/group` proposent également `tilt-card`. Inspirée du CodePen de Taha Shashtari, l'interaction utilise une inclinaison radiale `rotate3d` limitée à 10° et une perspective de 200 px, animées par Motion sur 250 ms. La zone de détection conserve la géométrie mesurée à l'entrée du pointeur afin d'éviter les oscillations dues à la transformation en cours. Cet effet est réservé aux pointeurs précis.
+
 Le filtre JavaScript suivant permet à une intégration d'exposer une interaction sur un autre bloc statique compatible :
 
 ```js
